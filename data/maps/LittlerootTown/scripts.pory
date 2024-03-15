@@ -1022,9 +1022,16 @@ LittlerootTown_Text_BirchSomethingToShowYouAtLab:
 
 `
 
-script LittlerootTown_EventScript_Test{
-	lock
+script LittlerootTown_SignScript_Test{
+	lockall
 	msgbox("Testing 123...")
-	release
+	releaseall
+	end
+}
+
+script LittlerootTown_SignScript_TestProfLab{
+	lockall
+	msgbox("Test Professor's Lab")
+	releaseall
 	end
 }

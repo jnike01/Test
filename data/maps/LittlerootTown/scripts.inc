@@ -2041,16 +2041,30 @@ LittlerootTown_Text_BirchSomethingToShowYouAtLab:
 # 1021 "data/maps/LittlerootTown/scripts.pory"
 	.string "Let's go to my LAB.$"
 
-LittlerootTown_EventScript_Test::
+LittlerootTown_SignScript_Test::
 # 1026 "data/maps/LittlerootTown/scripts.pory"
-	lock
+	lockall
 # 1027 "data/maps/LittlerootTown/scripts.pory"
-	msgbox LittlerootTown_EventScript_Test_Text_0
+	msgbox LittlerootTown_SignScript_Test_Text_0
 # 1028 "data/maps/LittlerootTown/scripts.pory"
-	release
+	releaseall
 	end
 
 
-LittlerootTown_EventScript_Test_Text_0:
+LittlerootTown_SignScript_TestProfLab::
+# 1033 "data/maps/LittlerootTown/scripts.pory"
+	lockall
+# 1034 "data/maps/LittlerootTown/scripts.pory"
+	msgbox LittlerootTown_SignScript_TestProfLab_Text_0
+# 1035 "data/maps/LittlerootTown/scripts.pory"
+	releaseall
+	end
+
+
+LittlerootTown_SignScript_Test_Text_0:
 # 1027 "data/maps/LittlerootTown/scripts.pory"
 	.string "Testing 123...$"
+
+LittlerootTown_SignScript_TestProfLab_Text_0:
+# 1034 "data/maps/LittlerootTown/scripts.pory"
+	.string "Test Professor's Lab$"

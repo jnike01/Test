@@ -1,0 +1,132 @@
+mapscripts TestProfLab_MapScripts{}
+
+script TestProfLab_PersonScript_TestProf{
+    lockall
+    msgbox("I'm in development...")
+    releaseall
+    end
+}
+
+script TestProfLab_ObjectScript_PokeballOne{
+    lockall
+    showmonpic(SPECIES_TOTODILE, 10, 3)
+    msgbox("Do you want to choose Totodile?", MSGBOX_YESNO)
+    if(var(VAR_RESULT) == YES){
+        givemon(SPECIES_TOTODILE, 5, ITEM_ORAN_BERRY)
+        if(var(VAR_RESULT) == MON_GIVEN_TO_PARTY){
+            playfanfare(MUS_OBTAIN_ITEM)
+            msgbox("Received Totodile!")
+            removeobject(2)
+            setflag(FLAG_PROF_BALL_1)
+            call(TestProfLab_ActionScript_NicknamePartyMon)
+        }
+        elif(var(VAR_RESULT) == MON_GIVEN_TO_PC){
+            playfanfare(MUS_OBTAIN_ITEM)
+            msgbox("Received Totodile!")
+            removeobject(2)
+            setflag(FLAG_PROF_BALL_1)
+            call(TestProfLab_ActionScript_NicknameBoxMon)
+        }
+        else{
+            hidemonpic
+            msgbox("No more room.")
+        }
+    }
+    else{
+        hidemonpic
+        msgbox(TestProfLab_TextScript_NotChosen)
+    }
+    waitmessage
+    releaseall
+    end
+}
+
+script TestProfLab_ObjectScript_PokeballTwo{
+    lockall
+    showmonpic(SPECIES_CHIKORITA, 10, 3)
+    msgbox("Do you want to choose Chikorita?", MSGBOX_YESNO)
+    if(var(VAR_RESULT) == YES){
+        givemon(SPECIES_CHIKORITA, 5, ITEM_ORAN_BERRY)
+        if(var(VAR_RESULT) == MON_GIVEN_TO_PARTY){
+            playfanfare(MUS_OBTAIN_ITEM)
+            msgbox("Received Chikorita!")
+            removeobject(3)
+            setflag(FLAG_PROF_BALL_1)
+            call(TestProfLab_ActionScript_NicknamePartyMon)
+        }
+        elif(var(VAR_RESULT) == MON_GIVEN_TO_PC){
+            playfanfare(MUS_OBTAIN_ITEM)
+            msgbox("Received Chikorita!")
+            removeobject(3)
+            setflag(FLAG_PROF_BALL_1)
+            call(TestProfLab_ActionScript_NicknameBoxMon)
+        }
+        else{
+            hidemonpic
+            msgbox("No more room.")
+        }
+    }
+    else{
+        hidemonpic
+        msgbox(TestProfLab_TextScript_NotChosen)
+    }
+    waitmessage
+    releaseall
+    end
+}
+
+script TestProfLab_ObjectScript_PokeballThree{
+    lockall
+    showmonpic(SPECIES_CYNDAQUIL, 10, 3)
+    msgbox("Do you want to choose Cyndaquil?", MSGBOX_YESNO)
+    if(var(VAR_RESULT) == YES){
+        givemon(SPECIES_CYNDAQUIL, 5, ITEM_ORAN_BERRY)
+        if(var(VAR_RESULT) == MON_GIVEN_TO_PARTY){
+            playfanfare(MUS_OBTAIN_ITEM)
+            msgbox("Received Cyndaquil!")
+            removeobject(4)
+            setflag(FLAG_PROF_BALL_1)
+            call(TestProfLab_ActionScript_NicknamePartyMon)
+        }
+        elif(var(VAR_RESULT) == MON_GIVEN_TO_PC){
+            playfanfare(MUS_OBTAIN_ITEM)
+            msgbox("Received Cyndaquil!")
+            removeobject(4)
+            setflag(FLAG_PROF_BALL_1)
+            call(TestProfLab_ActionScript_NicknameBoxMon)
+        }
+        else{
+            hidemonpic
+            msgbox("No more room.")
+        }
+    }
+    else{
+        hidemonpic
+        msgbox(TestProfLab_TextScript_NotChosen)
+    }
+    waitmessage
+    releaseall
+    end
+}
+
+script TestProfLab_ActionScript_NicknamePartyMon{
+    msgbox("Give it a nickname?", MSGBOX_YESNO)
+    hidemonpic
+    if(var(VAR_RESULT) == YES){
+        call(Common_EventScript_GetGiftMonPartySlot)
+        call(Common_EventScript_NameReceivedPartyMon)
+    } 
+}
+
+script TestProfLab_ActionScript_NicknameBoxMon{
+    msgbox("Give it a nickname?", MSGBOX_YESNO)
+    hidemonpic
+    if(var(VAR_RESULT) == YES){
+        call(Common_EventScript_NameReceivedBoxMon)
+    }
+    call(Common_EventScript_TransferredToPC)
+}
+
+text TestProfLab_TextScript_NotChosen{
+    "You did not choose the Pokemon."
+}

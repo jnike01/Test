@@ -52,7 +52,7 @@ LittlerootTown_OnTransition:
 	call_if_eq VAR_LITTLEROOT_RIVAL_STATE, 3, LittlerootTown_EventScript_SetRivalLeftForRoute103
 	call_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 1, LittlerootTown_EventScript_HideMapNamePopup
 	call_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2, LittlerootTown_EventScript_LeftLabAfterDexUpgrade
-	call LittlerootTown_ControlScript_BrendanState
+	call_if_unset FLAG_BRENDAN_TRANSITION, LittlerootTown_ControlScript_BrendanState
 	end
 
 LittlerootTown_EventScript_LeftLabAfterDexUpgrade::
@@ -1026,9 +1026,12 @@ LittlerootTown_Text_BirchSomethingToShowYouAtLab:
 script LittlerootTown_ControlScript_BrendanState{
 	if(!(flag(FLAG_PROF_BALL_1) || flag(FLAG_PROF_BALL_2) || flag(FLAG_PROF_BALL_3))){
 		setflag(FLAG_TEST_BRENDAN)
+		setvar(VAR_LITTLEROOT_STATE, 0)
 	}
 	else{
-		clearflag(FLAG_TEST_BRENDAN)
+		if(var(VAR_LITTLEROOT_STATE) == 0){
+			clearflag(FLAG_TEST_BRENDAN)
+		}
 	}
 }
 
@@ -1047,10 +1050,28 @@ script LittlerootTown_SignScript_TestProfLab{
 }
 
 script LittlerootTown_TrainerScript_BrendanBattle{
-	trainerbattle_single(TRAINER_BRENDAN_ROUTE_103_TORCHIC, LittlerootTown_TextScript_BrendanIntro, LittlerootTown_TextScript_BrendanOutro)
+	trainerbattle_single(TRAINER_BRENDAN_ROUTE_103_TORCHIC, LittlerootTown_TextScript_BrendanIntro, LittlerootTown_TextScript_BrendanOutro, LittlerootTown_ActionScript_BrendanAftermath)
 	msgbox(LittlerootTown_TextScript_BrendanPostBattle, MSGBOX_AUTOCLOSE)
 	waitmessage
 	end
+}
+
+script LittlerootTown_ActionScript_BrendanAftermath{
+	lockall
+	applymovement(9, LittlerootTown_MovementScript_BrendanLeaving)
+	waitmovement(0)
+	removeobject(9)
+	setflag(FLAG_TEST_BRENDAN)
+	setvar(VAR_LITTLEROOT_STATE, 1)
+	setflag(FLAG_ADVENTURE_STARTED)
+	setflag(FLAG_BRENDAN_TRANSITION)
+	releaseall
+}
+
+movement LittlerootTown_MovementScript_BrendanLeaving{
+	face_down
+	walk_down
+	walk_left * 7
 }
 
 text LittlerootTown_TextScript_BrendanIntro{

@@ -3055,4 +3055,8 @@ extern const u8 gText_ExpShareOff[];
 
 extern const u8 gText_BasePointsResetToZero[];
 
+extern const u8 gText_KantoStarter[];
+extern const u8 gText_JohtoStarter[];
+extern const u8 gText_HoennStarter[];
+
 #endif // GUARD_STRINGS_H

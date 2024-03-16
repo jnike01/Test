@@ -8,29 +8,32 @@ script TestProfLab_ControlScript_ControlState{
 }
 
 script TestProfLab_PersonScript_TestProf{
-    lock
-    faceplayer
     if(!(flag(FLAG_PROF_BALL_1) || flag(FLAG_PROF_BALL_2) || flag(FLAG_PROF_BALL_3))){
-        msgbox("Hello, would you like to see more?", MSGBOX_YESNO)
-        if(var(VAR_RESULT) == YES){
-            if(var(VAR_TESTPROFLAB_CONTROLSTATE) != 2){
-                addvar(VAR_TESTPROFLAB_CONTROLSTATE, 1)
-            }
-            else{
-                setvar(VAR_TESTPROFLAB_CONTROLSTATE, 0)
-            }
-            msgbox("Choose your Pokemon wisely.")
+        lock
+        faceplayer
+        message("Hello, would you like to see more?")
+        multichoice(25, 5, MULTI_STARTER_CHOICE, 0)
+        closemessage
+        if(var(VAR_RESULT) == 0){
+            call(TestProfLab_ActionScript_StarterFade)
+            setvar(VAR_TESTPROFLAB_CONTROLSTATE, 2)
         }
-        else{
-            msgbox("Choose your Pokemon wisely.")
+        elif(var(VAR_RESULT) == 1){
+            call(TestProfLab_ActionScript_StarterFade)
+            setvar(VAR_TESTPROFLAB_CONTROLSTATE, 1)
         }
+        elif(var(VAR_RESULT) == 2){
+            call(TestProfLab_ActionScript_StarterFade)
+            setvar(VAR_TESTPROFLAB_CONTROLSTATE, 0)
+        }
+        msgbox("Choose wisely...")
+        waitmessage
+        release
     }
     else{
-        msgbox("Take care of your Pokemon.")
+        msgbox("Please take care of your Pokemon.", MSGBOX_NPC)
     }
-    waitmessage
-    release
-    end
+    end    
 }
 
 script TestProfLab_ObjectScript_PokeballOne{
@@ -388,6 +391,13 @@ script TestProfLab_ActionScript_GiveTorchic{
         msgbox(TestProfLab_TextScript_NotChosen)
     }
     waitmessage
+}
+
+script TestProfLab_ActionScript_StarterFade{
+    fadescreen(FADE_TO_BLACK)
+    delay(20)
+    fadescreen(FADE_FROM_BLACK)
+    return
 }
 
 script TestProfLab_ActionScript_NicknamePartyMon{

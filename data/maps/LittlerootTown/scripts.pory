@@ -52,6 +52,7 @@ LittlerootTown_OnTransition:
 	call_if_eq VAR_LITTLEROOT_RIVAL_STATE, 3, LittlerootTown_EventScript_SetRivalLeftForRoute103
 	call_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 1, LittlerootTown_EventScript_HideMapNamePopup
 	call_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2, LittlerootTown_EventScript_LeftLabAfterDexUpgrade
+	call LittlerootTown_ControlScript_BrendanState
 	end
 
 LittlerootTown_EventScript_LeftLabAfterDexUpgrade::
@@ -1022,6 +1023,15 @@ LittlerootTown_Text_BirchSomethingToShowYouAtLab:
 
 `
 
+script LittlerootTown_ControlScript_BrendanState{
+	if(!(flag(FLAG_PROF_BALL_1) || flag(FLAG_PROF_BALL_2) || flag(FLAG_PROF_BALL_3))){
+		setflag(FLAG_TEST_BRENDAN)
+	}
+	else{
+		clearflag(FLAG_TEST_BRENDAN)
+	}
+}
+
 script LittlerootTown_SignScript_Test{
 	lockall
 	msgbox("Testing 123...")
@@ -1034,4 +1044,23 @@ script LittlerootTown_SignScript_TestProfLab{
 	msgbox("Test Professor's Lab")
 	releaseall
 	end
+}
+
+script LittlerootTown_TrainerScript_BrendanBattle{
+	trainerbattle_single(TRAINER_BRENDAN_ROUTE_103_TORCHIC, LittlerootTown_TextScript_BrendanIntro, LittlerootTown_TextScript_BrendanOutro)
+	msgbox(LittlerootTown_TextScript_BrendanPostBattle, MSGBOX_AUTOCLOSE)
+	waitmessage
+	end
+}
+
+text LittlerootTown_TextScript_BrendanIntro{
+	"You'll never win!"
+}
+
+text LittlerootTown_TextScript_BrendanOutro{
+	"Damn, bro..."
+}
+
+text LittlerootTown_TextScript_BrendanPostBattle{
+	"I'll win next time!"
 }

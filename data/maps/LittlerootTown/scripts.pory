@@ -1035,25 +1035,33 @@ script LittlerootTown_ControlScript_BrendanState{
 	}
 }
 
-script LittlerootTown_SignScript_Test{
-	lockall
-	msgbox("Testing 123...")
-	releaseall
-	end
-}
-
-script LittlerootTown_SignScript_TestProfLab{
-	lockall
-	msgbox("Test Professor's Lab")
-	releaseall
-	end
-}
-
 script LittlerootTown_TrainerScript_BrendanBattle{
 	trainerbattle_single(TRAINER_BRENDAN_ROUTE_103_TORCHIC, LittlerootTown_TextScript_BrendanIntro, LittlerootTown_TextScript_BrendanOutro, LittlerootTown_ActionScript_BrendanAftermath)
 	msgbox(LittlerootTown_TextScript_BrendanPostBattle, MSGBOX_AUTOCLOSE)
 	waitmessage
 	end
+}
+
+script LittlerootTown_EncounterScript_GroudonOW{
+	lockall
+	setflag(FLAG_OW_GROUDON)
+	playmoncry(SPECIES_GROUDON, CRY_MODE_ENCOUNTER)
+	delay(40)
+	waitmoncry
+	setwildbattle(SPECIES_GROUDON, 5, ITEM_RED_ORB)
+	dowildbattle
+	specialvar(VAR_RESULT, GetBattleOutcome)
+	if(var(VAR_RESULT) == B_OUTCOME_CAUGHT){
+		call(LittlerootTown_ActionScript_WonOrCaught)
+	}
+	elif(var(VAR_RESULT) == B_OUTCOME_WON){
+		call(LittlerootTown_ActionScript_WonOrCaught)
+	}
+	elif(var(VAR_RESULT) == B_OUTCOME_RAN){
+		call(LittlerootTown_ActionScript_RanAway)
+	}
+	waitmessage
+	releaseall
 }
 
 script LittlerootTown_ActionScript_BrendanAftermath{
@@ -1066,6 +1074,39 @@ script LittlerootTown_ActionScript_BrendanAftermath{
 	setflag(FLAG_ADVENTURE_STARTED)
 	setflag(FLAG_BRENDAN_TRANSITION)
 	releaseall
+}
+
+script LittlerootTown_ActionScript_WonOrCaught{
+	fadescreen(FADE_TO_BLACK)
+	removeobject(10)
+	fadescreen(FADE_FROM_BLACK)
+	msgbox("You are the Pokemon Master!")
+	return
+}
+
+script LittlerootTown_ActionScript_RanAway{
+	playmoncry(SPECIES_GROUDON, CRY_MODE_ENCOUNTER)
+	msgbox("Grouuu...", MSGBOX_AUTOCLOSE)
+	delay(20)
+	fadescreen(FADE_TO_BLACK)
+	removeobject(10)
+	fadescreen(FADE_FROM_BLACK)
+	msgbox("You are not the Pokemon Master!")
+	return
+}
+
+script LittlerootTown_SignScript_Test{
+	lockall
+	msgbox("Testing 123...")
+	releaseall
+	end
+}
+
+script LittlerootTown_SignScript_TestProfLab{
+	lockall
+	msgbox("Test Professor's Lab")
+	releaseall
+	end
 }
 
 movement LittlerootTown_MovementScript_BrendanLeaving{

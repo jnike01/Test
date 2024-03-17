@@ -167,8 +167,8 @@
       "dest_warp_id": "1"
     },
     {
-      "x": 7,
-      "y": 16,
+      "x": -4,
+      "y": 4,
       "elevation": 0,
       "dest_map": "MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB",
       "dest_warp_id": "0"
@@ -178,6 +178,20 @@
       "y": 9,
       "elevation": 0,
       "dest_map": "MAP_TEST_PROF_LAB",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 4,
+      "y": 16,
+      "elevation": 0,
+      "dest_map": "MAP_TEST_POKEMON_MART",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 8,
+      "y": 16,
+      "elevation": 0,
+      "dest_map": "MAP_TEST_POKEMON_CENTER",
       "dest_warp_id": "0"
     }
   ],
@@ -262,6 +276,24 @@
       "var": "VAR_LITTLEROOT_TOWN_STATE",
       "var_value": "3",
       "script": "LittlerootTown_EventScript_GiveRunningShoesTrigger1"
+    },
+    {
+      "type": "trigger",
+      "x": 10,
+      "y": 1,
+      "elevation": 0,
+      "var": "VAR_LITTLEROOT_STATE",
+      "var_value": "0",
+      "script": "LittlerootTown_TriggerScript_BlockPath"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 1,
+      "elevation": 0,
+      "var": "VAR_LITTLEROOT_STATE",
+      "var_value": "0",
+      "script": "LittlerootTown_TriggerScript_BlockPath"
     }
   ],
   "bg_events": [
@@ -275,8 +307,8 @@
     },
     {
       "type": "sign",
-      "x": 6,
-      "y": 17,
+      "x": -4,
+      "y": 5,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "LittlerootTown_EventScript_BirchsLabSign"

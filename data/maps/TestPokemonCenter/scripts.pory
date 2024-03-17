@@ -1,0 +1,38 @@
+mapscripts TestPokemonCenter_MapScripts{
+    MAP_SCRIPT_ON_TRANSITION: TestPokemonCenter_ControlScript_OnTransition
+    MAP_SCRIPT_ON_RESUME: CableClub_OnResume // necessary for all pokemon centers to work
+}
+
+script TestPokemonCenter_ControlScript_OnTransition{
+    setrespawn(HEAL_LOCATION_LITTLEROOT_TOWN)
+    end
+}
+
+script TestPokemonCenter_PersonScript_NurseJoy{
+    setvar(VAR_0x800B, 1)
+    call(Common_EventScript_PkmnCenterNurse)
+    waitmessage
+    waitbuttonpress
+    release
+    end
+}
+
+script TestPokemonCenter_PersonScript_BasicNurse{
+    lock 
+    faceplayer
+    msgbox("Would you like me to heal your party?", MSGBOX_YESNO)
+    if(var(VAR_RESULT) == YES){
+        incrementgamestat(GAME_STAT_USED_POKECENTER)
+        fadescreen(FADE_INTO_BLACK)
+        special(HealPlayerParty)
+        wait(20)
+        fadescreen(FADE_FROM_BLACK)
+        msgbox("Come again soon!")
+        waitmessage
+        release 
+        end
+    }
+    else{
+        msgbox("Have a nice day!", MSGBOX_NPC)
+    }
+}

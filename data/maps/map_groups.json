@@ -100,7 +100,9 @@
     "LittlerootTown_MaysHouse_1F",
     "LittlerootTown_MaysHouse_2F",
     "LittlerootTown_ProfessorBirchsLab",
-    "TestProfLab"
+    "TestProfLab",
+    "TestPokemonCenter",
+    "TestPokemonMart"
   ],
   "gMapGroup_IndoorOldale": [
     "OldaleTown_House1",

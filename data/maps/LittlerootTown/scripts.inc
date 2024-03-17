@@ -2186,46 +2186,66 @@ LittlerootTown_ActionScript_RanAway::
 	return
 
 
-LittlerootTown_SignScript_Test::
+LittlerootTown_TriggerScript_BlockPath::
 # 1099 "data/maps/LittlerootTown/scripts.pory"
 	lockall
 # 1100 "data/maps/LittlerootTown/scripts.pory"
-	msgbox LittlerootTown_SignScript_Test_Text_0
+	msgbox LittlerootTown_TriggerScript_BlockPath_Text_0
 # 1101 "data/maps/LittlerootTown/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_MovementScript_StopPlayer
+# 1102 "data/maps/LittlerootTown/scripts.pory"
+	waitmovement 0
+# 1103 "data/maps/LittlerootTown/scripts.pory"
+	releaseall
+	return
+
+
+LittlerootTown_SignScript_Test::
+# 1107 "data/maps/LittlerootTown/scripts.pory"
+	lockall
+# 1108 "data/maps/LittlerootTown/scripts.pory"
+	msgbox LittlerootTown_SignScript_Test_Text_0
+# 1109 "data/maps/LittlerootTown/scripts.pory"
 	releaseall
 	end
 
 
 LittlerootTown_SignScript_TestProfLab::
-# 1106 "data/maps/LittlerootTown/scripts.pory"
+# 1114 "data/maps/LittlerootTown/scripts.pory"
 	lockall
-# 1107 "data/maps/LittlerootTown/scripts.pory"
+# 1115 "data/maps/LittlerootTown/scripts.pory"
 	msgbox LittlerootTown_SignScript_TestProfLab_Text_0
-# 1108 "data/maps/LittlerootTown/scripts.pory"
+# 1116 "data/maps/LittlerootTown/scripts.pory"
 	releaseall
 	end
 
 
-# 1112 "data/maps/LittlerootTown/scripts.pory"
+# 1120 "data/maps/LittlerootTown/scripts.pory"
 LittlerootTown_MovementScript_BrendanLeaving:
-# 1113 "data/maps/LittlerootTown/scripts.pory"
+# 1121 "data/maps/LittlerootTown/scripts.pory"
 	face_down
-# 1114 "data/maps/LittlerootTown/scripts.pory"
+# 1122 "data/maps/LittlerootTown/scripts.pory"
 	walk_down
-# 1115 "data/maps/LittlerootTown/scripts.pory"
+# 1123 "data/maps/LittlerootTown/scripts.pory"
 	walk_left
-# 1115 "data/maps/LittlerootTown/scripts.pory"
+# 1123 "data/maps/LittlerootTown/scripts.pory"
 	walk_left
-# 1115 "data/maps/LittlerootTown/scripts.pory"
+# 1123 "data/maps/LittlerootTown/scripts.pory"
 	walk_left
-# 1115 "data/maps/LittlerootTown/scripts.pory"
+# 1123 "data/maps/LittlerootTown/scripts.pory"
 	walk_left
-# 1115 "data/maps/LittlerootTown/scripts.pory"
+# 1123 "data/maps/LittlerootTown/scripts.pory"
 	walk_left
-# 1115 "data/maps/LittlerootTown/scripts.pory"
+# 1123 "data/maps/LittlerootTown/scripts.pory"
 	walk_left
-# 1115 "data/maps/LittlerootTown/scripts.pory"
+# 1123 "data/maps/LittlerootTown/scripts.pory"
 	walk_left
+	step_end
+
+# 1126 "data/maps/LittlerootTown/scripts.pory"
+LittlerootTown_MovementScript_StopPlayer:
+# 1127 "data/maps/LittlerootTown/scripts.pory"
+	walk_down
 	step_end
 
 LittlerootTown_ActionScript_WonOrCaught_Text_0:
@@ -2240,22 +2260,26 @@ LittlerootTown_ActionScript_RanAway_Text_1:
 # 1094 "data/maps/LittlerootTown/scripts.pory"
 	.string "You are not the Pokemon Master!$"
 
-LittlerootTown_SignScript_Test_Text_0:
+LittlerootTown_TriggerScript_BlockPath_Text_0:
 # 1100 "data/maps/LittlerootTown/scripts.pory"
+	.string "You don't have a Pokemon yet!$"
+
+LittlerootTown_SignScript_Test_Text_0:
+# 1108 "data/maps/LittlerootTown/scripts.pory"
 	.string "Testing 123...$"
 
 LittlerootTown_SignScript_TestProfLab_Text_0:
-# 1107 "data/maps/LittlerootTown/scripts.pory"
+# 1115 "data/maps/LittlerootTown/scripts.pory"
 	.string "Test Professor's Lab$"
 
 LittlerootTown_TextScript_BrendanIntro::
-# 1118 "data/maps/LittlerootTown/scripts.pory"
+# 1130 "data/maps/LittlerootTown/scripts.pory"
 	.string "You'll never win!$"
 
 LittlerootTown_TextScript_BrendanOutro::
-# 1122 "data/maps/LittlerootTown/scripts.pory"
+# 1134 "data/maps/LittlerootTown/scripts.pory"
 	.string "Damn, bro...$"
 
 LittlerootTown_TextScript_BrendanPostBattle::
-# 1126 "data/maps/LittlerootTown/scripts.pory"
+# 1138 "data/maps/LittlerootTown/scripts.pory"
 	.string "I'll win next time!$"

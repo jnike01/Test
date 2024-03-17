@@ -4420,6 +4420,26 @@
       "secondary_tileset": "gTileset_Lab",
       "border_filepath": "data/layouts/TestProfLab/border.bin",
       "blockdata_filepath": "data/layouts/TestProfLab/map.bin"
+    },
+    {
+      "id": "LAYOUT_TEST_POKEMON_CENTER",
+      "name": "TestPokemonCenter_Layout",
+      "width": 14,
+      "height": 9,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_PokemonCenter",
+      "border_filepath": "data/layouts/TestPokemonCenter/border.bin",
+      "blockdata_filepath": "data/layouts/TestPokemonCenter/map.bin"
+    },
+    {
+      "id": "LAYOUT_TEST_POKEMON_MART",
+      "name": "TestPokemonMart_Layout",
+      "width": 11,
+      "height": 8,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_Shop",
+      "border_filepath": "data/layouts/TestPokemonMart/border.bin",
+      "blockdata_filepath": "data/layouts/TestPokemonMart/map.bin"
     }
   ]
 }

@@ -17,7 +17,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_PROF_BIRCH",
       "x": 6,
-      "y": 5,
+      "y": 6,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -84,7 +84,42 @@
     }
   ],
   "coord_events": [
-
+    {
+      "type": "trigger",
+      "x": 6,
+      "y": 11,
+      "elevation": 0,
+      "var": "VAR_LITTLEROOT_STATE",
+      "var_value": "0",
+      "script": "TestProfLab_TriggerScript_StartStarterSequence"
+    },
+    {
+      "type": "trigger",
+      "x": 7,
+      "y": 11,
+      "elevation": 0,
+      "var": "VAR_LITTLEROOT_STATE",
+      "var_value": "0",
+      "script": "TestProfLab_TriggerScript_StartStarterSequence2"
+    },
+    {
+      "type": "trigger",
+      "x": 6,
+      "y": 11,
+      "elevation": 0,
+      "var": "VAR_LITTLEROOT_STATE",
+      "var_value": "1",
+      "script": "TestProfLab_TriggerScript_StopLeaving"
+    },
+    {
+      "type": "trigger",
+      "x": 7,
+      "y": 11,
+      "elevation": 0,
+      "var": "VAR_LITTLEROOT_STATE",
+      "var_value": "1",
+      "script": "TestProfLab_TriggerScript_StopLeaving"
+    }
   ],
   "bg_events": [
 

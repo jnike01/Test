@@ -23,10 +23,7 @@ script TestPokemonCenter_PersonScript_BasicNurse{
     msgbox("Would you like me to heal your party?", MSGBOX_YESNO)
     if(var(VAR_RESULT) == YES){
         incrementgamestat(GAME_STAT_USED_POKECENTER)
-        fadescreen(FADE_INTO_BLACK)
         special(HealPlayerParty)
-        wait(20)
-        fadescreen(FADE_FROM_BLACK)
         msgbox("Come again soon!")
         waitmessage
         release 

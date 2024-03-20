@@ -2145,8 +2145,6 @@ LittlerootTown_ActionScript_BrendanAftermath::
 	removeobject 9
 # 1072 "data/maps/LittlerootTown/scripts.pory"
 	setflag FLAG_TEST_BRENDAN
-# 1073 "data/maps/LittlerootTown/scripts.pory"
-	setvar VAR_LITTLEROOT_STATE, 1
 # 1074 "data/maps/LittlerootTown/scripts.pory"
 	setflag FLAG_ADVENTURE_STARTED
 # 1075 "data/maps/LittlerootTown/scripts.pory"

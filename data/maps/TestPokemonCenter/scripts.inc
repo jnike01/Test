@@ -12,7 +12,7 @@ TestPokemonCenter_ControlScript_OnTransition::
 	end
 
 
-TestPokemonCenter_PersonScript_BasicNurse::
+TestPokemonCenter_PersonScript_NurseJoy::
 # 12 "data/maps/TestPokemonCenter/scripts.pory"
 	setvar VAR_0x800B, 1
 # 13 "data/maps/TestPokemonCenter/scripts.pory"
@@ -26,27 +26,27 @@ TestPokemonCenter_PersonScript_BasicNurse::
 	end
 
 
-TestPokemonCenter_PersonScript_NurseJoy::
+TestPokemonCenter_PersonScript_BasicNurse::
 # 21 "data/maps/TestPokemonCenter/scripts.pory"
 	lock
 # 22 "data/maps/TestPokemonCenter/scripts.pory"
 	faceplayer
 # 23 "data/maps/TestPokemonCenter/scripts.pory"
-	msgbox TestPokemonCenter_PersonScript_NurseJoy_Text_0, MSGBOX_YESNO
+	msgbox TestPokemonCenter_PersonScript_BasicNurse_Text_0, MSGBOX_YESNO
 # 24 "data/maps/TestPokemonCenter/scripts.pory"
 	compare VAR_RESULT, YES
-	goto_if_eq TestPokemonCenter_PersonScript_NurseJoy_1
+	goto_if_eq TestPokemonCenter_PersonScript_BasicNurse_1
 # 33 "data/maps/TestPokemonCenter/scripts.pory"
-	msgbox TestPokemonCenter_PersonScript_NurseJoy_Text_2, MSGBOX_NPC
+	msgbox TestPokemonCenter_PersonScript_BasicNurse_Text_2, MSGBOX_NPC
 	return
 
-TestPokemonCenter_PersonScript_NurseJoy_1:
+TestPokemonCenter_PersonScript_BasicNurse_1:
 # 25 "data/maps/TestPokemonCenter/scripts.pory"
 	incrementgamestat GAME_STAT_USED_POKECENTER
 # 26 "data/maps/TestPokemonCenter/scripts.pory"
 	special HealPlayerParty
 # 27 "data/maps/TestPokemonCenter/scripts.pory"
-	msgbox TestPokemonCenter_PersonScript_NurseJoy_Text_1
+	msgbox TestPokemonCenter_PersonScript_BasicNurse_Text_1
 # 28 "data/maps/TestPokemonCenter/scripts.pory"
 	waitmessage
 # 29 "data/maps/TestPokemonCenter/scripts.pory"
@@ -54,14 +54,14 @@ TestPokemonCenter_PersonScript_NurseJoy_1:
 	end
 
 
-TestPokemonCenter_PersonScript_NurseJoy_Text_0:
+TestPokemonCenter_PersonScript_BasicNurse_Text_0:
 # 23 "data/maps/TestPokemonCenter/scripts.pory"
 	.string "Would you like me to heal your party?$"
 
-TestPokemonCenter_PersonScript_NurseJoy_Text_1:
+TestPokemonCenter_PersonScript_BasicNurse_Text_1:
 # 27 "data/maps/TestPokemonCenter/scripts.pory"
 	.string "Come again soon!$"
 
-TestPokemonCenter_PersonScript_NurseJoy_Text_2:
+TestPokemonCenter_PersonScript_BasicNurse_Text_2:
 # 33 "data/maps/TestPokemonCenter/scripts.pory"
 	.string "Have a nice day!$"

@@ -11,7 +11,7 @@ script TestProfLab_PersonScript_TestProf{
     if(!(flag(FLAG_SYS_POKEMON_GET))){
         lock
         faceplayer
-         message("Hello, would you like to see more?")
+        message("Hello, would you like to see more?")
         multichoice(25, 5, MULTI_STARTER_CHOICE, 0)
         closemessage
         if(var(VAR_RESULT) == 0){
@@ -31,13 +31,27 @@ script TestProfLab_PersonScript_TestProf{
         release
     }
     else{
-        msgbox("Please take care of your Pokemon.", MSGBOX_NPC)
+        lock
+        faceplayer
+        if(flag(FLAG_SYS_POKEDEX_GET) && !(flag(FLAG_SYS_NATIONAL_DEX))){
+            msgbox(format("Do you want to upgrade to the National Dex?"), MSGBOX_YESNO)
+            if(var(VAR_RESULT) == YES){
+                call(TestProfLab_ActionScript_UpgradeToNatDex)
+            }
+            else{
+                msgbox("Please take care of your Pokemon.", MSGBOX_NPC)
+            }
+        }
+        else{
+            msgbox("Please take care of your Pokemon.", MSGBOX_NPC)
+        }
+        release
     }
     end    
 }   
 
 script TestProfLab_ObjectScript_PokeballOne{
-    lockall
+    lock
     setvar(VAR_TEMP_0, 1)
     if(!(flag(FLAG_SYS_POKEMON_GET))){
         if(var(VAR_TESTPROFLAB_CONTROLSTATE) == 0){
@@ -60,12 +74,12 @@ script TestProfLab_ObjectScript_PokeballOne{
         msgbox("Don't Take Another.")
     }
     waitmessage
-    releaseall
+    release
     end
 }
 
 script TestProfLab_ObjectScript_PokeballTwo{
-    lockall
+    lock
     if(!(flag(FLAG_SYS_POKEMON_GET))){
         if(var(VAR_TESTPROFLAB_CONTROLSTATE) == 0){
             bufferspeciesname(STR_VAR_1, SPECIES_TREECKO)
@@ -87,12 +101,12 @@ script TestProfLab_ObjectScript_PokeballTwo{
         msgbox("Don't Take Another.")
     }
     waitmessage
-    releaseall
+    release
     end
 }
 
 script TestProfLab_ObjectScript_PokeballThree{
-    lockall
+    lock
     if(!(flag(FLAG_SYS_POKEMON_GET))){
         if(var(VAR_TESTPROFLAB_CONTROLSTATE) == 0){
             bufferspeciesname(STR_VAR_1, SPECIES_TORCHIC)
@@ -114,7 +128,7 @@ script TestProfLab_ObjectScript_PokeballThree{
         msgbox("Don't Take Another.")
     }
     waitmessage
-    releaseall
+    release
     end
 }
 
@@ -128,14 +142,12 @@ script TestProfLab_ActionScript_GiveStarter{
         if(var(VAR_RESULT) == MON_GIVEN_TO_PARTY){
             playfanfare(MUS_OBTAIN_ITEM)
             msgbox("Received {STR_VAR_1}!")
-            removeobject(VAR_TEMP_0)
             call(TestProfLab_ActionScript_SetBallFlag)
             call(TestProfLab_ActionScript_NicknamePartyMon)
         }
         elif(var(VAR_RESULT) == MON_GIVEN_TO_PC){
             playfanfare(MUS_OBTAIN_ITEM)
             msgbox("Received {STR_VAR_1}!")
-            removeobject(VAR_TEMP_0)
             call(TestProfLab_ActionScript_SetBallFlag)
             call(TestProfLab_ActionScript_NicknameBoxMon)
             msgbox("Transferred {STR_VAR_1} to PC")
@@ -144,6 +156,8 @@ script TestProfLab_ActionScript_GiveStarter{
             hidemonpic
             msgbox("No more room for Pokemon!")
         }
+        closemessage
+        call(TestProfLab_ActionScript_InitiatePokedexSequence)
     }
     else{
         hidemonpic
@@ -164,6 +178,60 @@ script TestProfLab_ActionScript_SetBallFlag{
         setflag(FLAG_PROF_BALL_3)
         return
     }
+}
+
+script TestProfLab_ActionScript_InitiatePokedexSequence{
+    lock
+    delay(20)
+    applymovement(OBJ_EVENT_ID_PLAYER, TestProfLab_MovementScript_TurnToProf)
+    if(var(VAR_TEMP_0) == 1){
+        applymovement(1, TestProfLab_MovementScript_MoveBallOne)
+    }
+    if(var(VAR_TEMP_0) == 2){
+        applymovement(1, TestProfLab_MovementScript_MoveBallTwo)
+    }
+    if(var(VAR_TEMP_0) == 3){
+        applymovement(1, TestProfLab_MovementScript_MoveBallThree)
+    }
+    waitmovement(0)
+    delay(20)
+    call(TestProfLab_ActionScript_GivePokedex)
+    release
+    return
+}
+
+script TestProfLab_ActionScript_GivePokedex{
+    lock
+    msgbox(TestProfLab_TextScript_TakePokedex, MSGBOX_DEFAULT)
+    playfanfare(MUS_OBTAIN_ITEM)
+    message("{PLAYER} received the Pokedex!")
+    waitfanfare
+    closemessage
+    setflag(FLAG_SYS_POKEDEX_GET)
+    setflag(FLAG_ADVENTURE_STARTED)
+    special(SetUnlockedPokedexFlags)
+    setflag(FLAG_RECEIVED_POKEDEX_FROM_BIRCH)
+    setvar(VAR_CABLE_CLUB_TUTORIAL_STATE, 1)
+    msgbox(LittlerootTown_ProfessorBirchsLab_Text_ExplainPokedex, MSGBOX_DEFAULT)
+    msgbox("Also take these with you...", MSGBOX_DEFAULT)
+    giveitem(ITEM_POKE_BALL, 5)
+    msgbox(format("These allow you to catch your own Pokemon in tall grass so you can collect research for the Pokedex."), MSGBOX_DEFAULT)
+    waitmessage
+    release
+    return
+}
+
+script TestProfLab_ActionScript_UpgradeToNatDex{
+    lock
+    playfanfare(MUS_OBTAIN_ITEM)
+    message(LittlerootTown_ProfessorBirchsLab_Text_PokedexUpgradedToNational)
+    waitmessage
+    waitfanfare
+    setflag(FLAG_SYS_NATIONAL_DEX)
+    special(EnableNationalPokedex)
+    closemessage
+    release
+    return
 }
 
 script TestProfLab_ActionScript_StarterFade{
@@ -234,20 +302,40 @@ movement TestProfLab_MovementScript_ProfMoves{
     face_down
 }
 
+movement TestProfLab_MovementScript_MoveBallOne{
+    walk_left * 2
+}
+
+movement TestProfLab_MovementScript_MoveBallTwo{
+    walk_left * 1
+}
+
+movement TestProfLab_MovementScript_MoveBallThree{
+    face_left
+}
+
+movement TestProfLab_MovementScript_TurnToProf{
+    face_right
+}
+
 movement TestProfLab_MovementScript_DoNotLeave{
     walk_up
 }
 
 text TestProfLab_TextScript_BeginAdventureText{
-    "{COLOR RED}{SHADOW LIGHT_RED}TestProf:{COLOR DARK_GRAY}
-    {SHADOW LIGHT_GRAY} Hello {PLAYER}, my name is TestProf.\n"
-    "This is my lab.\p"
+    "{COLOR RED}{SHADOW LIGHT_RED}TestProf:{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY} Hello {PLAYER}, my name is\n"
+    "TestProf. This is my lab.\p"
     "Today is the day that you will be\n"
     "receiving a Pokemon.\p"
     "{COLOR GREEN}{SHADOW LIGHT_GREEN}Now choose wisely.\n"
-    "{COLOR BLUE}{SHADOW LIGHT_BLUE}If you would like to
-    see more options\l"
+    "{COLOR BLUE}{SHADOW LIGHT_BLUE}If you would like to see more options\l"
     "come and talk to me."
+}
+
+text TestProfLab_TextScript_TakePokedex{
+    "Here, {PLAYER}, I ordered this for my\n"
+    "research, but I think you should have\l"
+    "this Pokedex."
 }
 
 text TestProfLab_TextScript_NotChosen{

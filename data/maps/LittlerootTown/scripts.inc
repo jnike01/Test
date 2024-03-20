@@ -2045,11 +2045,10 @@ LittlerootTown_Text_BirchSomethingToShowYouAtLab:
 
 LittlerootTown_ControlScript_BrendanState::
 # 1027 "data/maps/LittlerootTown/scripts.pory"
-	goto_if_unset FLAG_PROF_BALL_1, LittlerootTown_ControlScript_BrendanState_3
-LittlerootTown_ControlScript_BrendanState_2:
+	goto_if_unset FLAG_SYS_POKEMON_GET, LittlerootTown_ControlScript_BrendanState_1
 # 1032 "data/maps/LittlerootTown/scripts.pory"
-	compare VAR_LITTLEROOT_STATE, 0
-	goto_if_eq LittlerootTown_ControlScript_BrendanState_8
+	compare VAR_LITTLEROOT_STATE, 2
+	goto_if_eq LittlerootTown_ControlScript_BrendanState_4
 	return
 
 LittlerootTown_ControlScript_BrendanState_1:
@@ -2059,17 +2058,7 @@ LittlerootTown_ControlScript_BrendanState_1:
 	setvar VAR_LITTLEROOT_STATE, 0
 	return
 
-LittlerootTown_ControlScript_BrendanState_3:
-# 1027 "data/maps/LittlerootTown/scripts.pory"
-	goto_if_unset FLAG_PROF_BALL_2, LittlerootTown_ControlScript_BrendanState_5
-	goto LittlerootTown_ControlScript_BrendanState_2
-
-LittlerootTown_ControlScript_BrendanState_5:
-# 1027 "data/maps/LittlerootTown/scripts.pory"
-	goto_if_unset FLAG_PROF_BALL_3, LittlerootTown_ControlScript_BrendanState_1
-	goto LittlerootTown_ControlScript_BrendanState_2
-
-LittlerootTown_ControlScript_BrendanState_8:
+LittlerootTown_ControlScript_BrendanState_4:
 # 1033 "data/maps/LittlerootTown/scripts.pory"
 	clearflag FLAG_TEST_BRENDAN
 	return
@@ -2145,6 +2134,8 @@ LittlerootTown_ActionScript_BrendanAftermath::
 	removeobject 9
 # 1072 "data/maps/LittlerootTown/scripts.pory"
 	setflag FLAG_TEST_BRENDAN
+# 1073 "data/maps/LittlerootTown/scripts.pory"
+	setvar VAR_LITTLEROOT_STATE, 3
 # 1074 "data/maps/LittlerootTown/scripts.pory"
 	setflag FLAG_ADVENTURE_STARTED
 # 1075 "data/maps/LittlerootTown/scripts.pory"

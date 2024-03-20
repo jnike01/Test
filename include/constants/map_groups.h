@@ -73,6 +73,7 @@
 #define MAP_TEST_PROF_LAB                        (5 | (1 << 8))
 #define MAP_TEST_POKEMON_CENTER                  (6 | (1 << 8))
 #define MAP_TEST_POKEMON_MART                    (7 | (1 << 8))
+#define MAP_TESTING_GROUNDS                      (8 | (1 << 8))
 
 // gMapGroup_IndoorOldale
 #define MAP_OLDALE_TOWN_HOUSE1            (0 | (2 << 8))

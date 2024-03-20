@@ -1,0 +1,42 @@
+mapscripts TestingGrounds_MapScripts{
+    MAP_SCRIPT_ON_TRANSITION: TestingGrounds_ControlScript_OnTransition
+    MAP_SCRIPT_ON_FRAME_TABLE[
+        VAR_TEMP_2, 0: TestingGrounds_ActionScript_EveryFrame
+    ]
+    MAP_SCRIPT_ON_RESUME: TestingGrounds_ControlScript_OnResume
+}
+
+script TestingGrounds_ControlScript_OnTransition{
+    setvar(VAR_TEMP_2, 0)
+}
+
+script TestingGrounds_ControlScript_OnResume{
+    if(flag(FLAG_TESTING_GROUNDS)){
+        clearflag(FLAG_TESTING_GROUNDS)
+        hideobjectat(1, MAP_TESTING_GROUNDS)
+    }
+    else{
+        setflag(FLAG_TESTING_GROUNDS)
+        showobjectat(1, MAP_TESTING_GROUNDS)
+    }
+}
+
+script TestingGrounds_PersonScript_TestNPC{
+    lock
+    faceplayer
+    buffernumberstring(STR_VAR_1, VAR_TEMP_0)
+    setvar(VAR_TEMP_2, 0)
+    msgbox("It's {STR_VAR_1}")
+    waitmessage
+    release
+    end
+}
+
+script TestingGrounds_ActionScript_EveryFrame{
+    lock
+    addvar(VAR_TEMP_0, 1)
+    msgbox("Updated On Frame...")
+    waitmessage
+    setvar(VAR_TEMP_2, 1)
+    release
+}

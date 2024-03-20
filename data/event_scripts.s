@@ -1073,3 +1073,5 @@ EventScript_VsSeekerChargingDone::
 	.include "data/maps/TestPokemonCenter/scripts.inc"
 
 	.include "data/maps/TestPokemonMart/scripts.inc"
+
+	.include "data/maps/TestingGrounds/scripts.inc"

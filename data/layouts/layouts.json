@@ -4440,6 +4440,16 @@
       "secondary_tileset": "gTileset_Shop",
       "border_filepath": "data/layouts/TestPokemonMart/border.bin",
       "blockdata_filepath": "data/layouts/TestPokemonMart/map.bin"
+    },
+    {
+      "id": "LAYOUT_TESTING_GROUNDS",
+      "name": "TestingGrounds_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_RustboroGym",
+      "border_filepath": "data/layouts/TestingGrounds/border.bin",
+      "blockdata_filepath": "data/layouts/TestingGrounds/map.bin"
     }
   ]
 }

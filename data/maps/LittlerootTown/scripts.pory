@@ -1042,6 +1042,28 @@ script LittlerootTown_TrainerScript_BrendanBattle{
 	end
 }
 
+script LittlerootTown_ActionScript_BrendanAftermath{
+	lockall
+	applymovement(9, LittlerootTown_MovementScript_BrendanLeaving)
+	special(SpawnCameraObject)
+	applymovement(OBJ_EVENT_ID_CAMERA, LittlerootTown_MovementScript_BrendanLeaving)
+	waitmovement(0)
+	opendoor(14, 8)
+	waitdooranim
+	applymovement(9, LittlerootTown_MovementScript_BrendanEnterDoor)
+	waitmovement(0)
+	removeobject(9)
+	closedoor(14, 8)
+	waitdooranim
+	applymovement(OBJ_EVENT_ID_CAMERA, LittlerootTown_MovementScript_PostBrendanCamRevert)
+	waitmovement(0)
+	special(RemoveCameraObject)
+	setflag(FLAG_TEST_BRENDAN)
+	setvar(VAR_LITTLEROOT_STATE, 3)
+	setflag(FLAG_BRENDAN_TRANSITION)
+	releaseall
+}
+
 script LittlerootTown_EncounterScript_GroudonOW{
 	lockall
 	setflag(FLAG_OW_GROUDON)
@@ -1061,18 +1083,6 @@ script LittlerootTown_EncounterScript_GroudonOW{
 		call(LittlerootTown_ActionScript_RanAway)
 	}
 	waitmessage
-	releaseall
-}
-
-script LittlerootTown_ActionScript_BrendanAftermath{
-	lockall
-	applymovement(9, LittlerootTown_MovementScript_BrendanLeaving)
-	waitmovement(0)
-	removeobject(9)
-	setflag(FLAG_TEST_BRENDAN)
-	setvar(VAR_LITTLEROOT_STATE, 3)
-	setflag(FLAG_ADVENTURE_STARTED)
-	setflag(FLAG_BRENDAN_TRANSITION)
 	releaseall
 }
 
@@ -1120,7 +1130,17 @@ script LittlerootTown_SignScript_TestProfLab{
 movement LittlerootTown_MovementScript_BrendanLeaving{
 	face_down
 	walk_down
-	walk_left * 7
+	walk_left * 11
+	walk_up * 2
+}
+
+movement LittlerootTown_MovementScript_BrendanEnterDoor{
+	walk_up
+}
+
+movement LittlerootTown_MovementScript_PostBrendanCamRevert{
+	walk_fast_right * 10
+	walk_diag_southeast
 }
 
 movement LittlerootTown_MovementScript_StopPlayer{

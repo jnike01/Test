@@ -80,6 +80,7 @@ script TestProfLab_ObjectScript_PokeballOne{
 
 script TestProfLab_ObjectScript_PokeballTwo{
     lock
+    setvar(VAR_TEMP_0, 2)
     if(!(flag(FLAG_SYS_POKEMON_GET))){
         if(var(VAR_TESTPROFLAB_CONTROLSTATE) == 0){
             bufferspeciesname(STR_VAR_1, SPECIES_TREECKO)
@@ -107,6 +108,7 @@ script TestProfLab_ObjectScript_PokeballTwo{
 
 script TestProfLab_ObjectScript_PokeballThree{
     lock
+    setvar(VAR_TEMP_0, 3)
     if(!(flag(FLAG_SYS_POKEMON_GET))){
         if(var(VAR_TESTPROFLAB_CONTROLSTATE) == 0){
             bufferspeciesname(STR_VAR_1, SPECIES_TORCHIC)

@@ -1068,10 +1068,12 @@ script LittlerootTown_EncounterScript_GroudonOW{
 	lockall
 	setflag(FLAG_OW_GROUDON)
 	playmoncry(SPECIES_GROUDON, CRY_MODE_ENCOUNTER)
-	delay(40)
 	waitmoncry
 	setwildbattle(SPECIES_GROUDON, 5, ITEM_RED_ORB)
-	dowildbattle
+	special(BattleSetup_StartLegendaryBattle)
+	resetweather
+	doweather
+	waitstate
 	specialvar(VAR_RESULT, GetBattleOutcome)
 	if(var(VAR_RESULT) == B_OUTCOME_CAUGHT){
 		call(LittlerootTown_ActionScript_WonOrCaught)
@@ -1084,6 +1086,17 @@ script LittlerootTown_EncounterScript_GroudonOW{
 	}
 	waitmessage
 	releaseall
+}
+
+script LittlerootTown_ActionScript_GroudonShake{
+	delay(30)
+	setvar(VAR_0x8004, 2) //@ vertical pan
+	setvar(VAR_0x8005, 6) //@ horizontal pan
+	setvar(VAR_0x8006, 4) //@ num shakes
+	setvar(VAR_0x8007, 4) //@ shake delay
+	special(ShakeCamera)
+	waitstate
+	delay(60)
 }
 
 script LittlerootTown_ActionScript_WonOrCaught{
@@ -1103,6 +1116,33 @@ script LittlerootTown_ActionScript_RanAway{
 	fadescreen(FADE_FROM_BLACK)
 	msgbox("You are not the Pokemon Master!")
 	return
+}
+
+script LittlerootTown_TriggerScript_GroudonTrigger{
+	setweather(WEATHER_DROUGHT)
+	doweather
+	applymovement(OBJ_EVENT_ID_PLAYER, LittlerootTown_MovementScript_InitiateGroudon)
+	waitmovement(0)
+	call(LittlerootTown_ActionScript_GroudonShake)
+	applymovement(10, LittlerootTown_MovementScript_GroudonMove)
+	waitmovement(0)
+	call(LittlerootTown_ActionScript_GroudonShake)
+	applymovement(10, LittlerootTown_MovementScript_GroudonMove)
+	waitmovement(0)
+	setvar(VAR_LITTLEROOT_STATE, 4)
+	goto(LittlerootTown_EncounterScript_GroudonOW)
+}
+
+script LittlerootTown_TriggerScript_GroudonLeftTrigger{
+	applymovement(OBJ_EVENT_ID_PLAYER, LittlerootTown_MovementScript_StepLeft)
+	waitmovement(0)
+	goto(LittlerootTown_TriggerScript_GroudonTrigger)
+}
+
+script LittlerootTown_TriggerScript_GroudonRightTrigger{
+	applymovement(OBJ_EVENT_ID_PLAYER, LittlerootTown_MovementScript_StepRight)
+	waitmovement(0)
+	goto(LittlerootTown_TriggerScript_GroudonTrigger)
 }
 
 script LittlerootTown_TriggerScript_BlockPath{
@@ -1125,6 +1165,24 @@ script LittlerootTown_SignScript_TestProfLab{
 	msgbox("Test Professor's Lab")
 	releaseall
 	end
+}
+
+movement LittlerootTown_MovementScript_GroudonMove{
+	walk_down
+}
+
+movement LittlerootTown_MovementScript_InitiateGroudon{
+	walk_up * 2
+}
+
+movement LittlerootTown_MovementScript_StepLeft{
+	walk_right
+	face_up
+}
+
+movement LittlerootTown_MovementScript_StepRight{
+	walk_left
+	face_up
 }
 
 movement LittlerootTown_MovementScript_BrendanLeaving{

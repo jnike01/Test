@@ -2124,215 +2124,317 @@ LittlerootTown_EncounterScript_GroudonOW::
 # 1070 "data/maps/LittlerootTown/scripts.pory"
 	playmoncry SPECIES_GROUDON, CRY_MODE_ENCOUNTER
 # 1071 "data/maps/LittlerootTown/scripts.pory"
-	delay 40
-# 1072 "data/maps/LittlerootTown/scripts.pory"
 	waitmoncry
-# 1073 "data/maps/LittlerootTown/scripts.pory"
+# 1072 "data/maps/LittlerootTown/scripts.pory"
 	setwildbattle SPECIES_GROUDON, 5, ITEM_RED_ORB
+# 1073 "data/maps/LittlerootTown/scripts.pory"
+	special BattleSetup_StartLegendaryBattle
 # 1074 "data/maps/LittlerootTown/scripts.pory"
-	dowildbattle
+	resetweather
 # 1075 "data/maps/LittlerootTown/scripts.pory"
-	specialvar VAR_RESULT, GetBattleOutcome
+	doweather
 # 1076 "data/maps/LittlerootTown/scripts.pory"
+	waitstate
+# 1077 "data/maps/LittlerootTown/scripts.pory"
+	specialvar VAR_RESULT, GetBattleOutcome
+# 1078 "data/maps/LittlerootTown/scripts.pory"
 	compare VAR_RESULT, B_OUTCOME_CAUGHT
 	goto_if_eq LittlerootTown_EncounterScript_GroudonOW_2
-# 1079 "data/maps/LittlerootTown/scripts.pory"
+# 1081 "data/maps/LittlerootTown/scripts.pory"
 	compare VAR_RESULT, B_OUTCOME_WON
 	goto_if_eq LittlerootTown_EncounterScript_GroudonOW_3
-# 1082 "data/maps/LittlerootTown/scripts.pory"
+# 1084 "data/maps/LittlerootTown/scripts.pory"
 	compare VAR_RESULT, B_OUTCOME_RAN
 	goto_if_eq LittlerootTown_EncounterScript_GroudonOW_4
 LittlerootTown_EncounterScript_GroudonOW_1:
-# 1085 "data/maps/LittlerootTown/scripts.pory"
+# 1087 "data/maps/LittlerootTown/scripts.pory"
 	waitmessage
-# 1086 "data/maps/LittlerootTown/scripts.pory"
+# 1088 "data/maps/LittlerootTown/scripts.pory"
 	releaseall
 	return
 
 LittlerootTown_EncounterScript_GroudonOW_2:
-# 1077 "data/maps/LittlerootTown/scripts.pory"
+# 1079 "data/maps/LittlerootTown/scripts.pory"
 	call LittlerootTown_ActionScript_WonOrCaught
 	goto LittlerootTown_EncounterScript_GroudonOW_1
 
 LittlerootTown_EncounterScript_GroudonOW_3:
-# 1080 "data/maps/LittlerootTown/scripts.pory"
+# 1082 "data/maps/LittlerootTown/scripts.pory"
 	call LittlerootTown_ActionScript_WonOrCaught
 	goto LittlerootTown_EncounterScript_GroudonOW_1
 
 LittlerootTown_EncounterScript_GroudonOW_4:
-# 1083 "data/maps/LittlerootTown/scripts.pory"
+# 1085 "data/maps/LittlerootTown/scripts.pory"
 	call LittlerootTown_ActionScript_RanAway
 	goto LittlerootTown_EncounterScript_GroudonOW_1
 
 
-LittlerootTown_ActionScript_WonOrCaught::
-# 1090 "data/maps/LittlerootTown/scripts.pory"
-	fadescreen FADE_TO_BLACK
-# 1091 "data/maps/LittlerootTown/scripts.pory"
-	removeobject 10
+LittlerootTown_ActionScript_GroudonShake::
 # 1092 "data/maps/LittlerootTown/scripts.pory"
-	fadescreen FADE_FROM_BLACK
+	delay 30
 # 1093 "data/maps/LittlerootTown/scripts.pory"
+	setvar VAR_0x8004, 2
+# 1094 "data/maps/LittlerootTown/scripts.pory"
+	setvar VAR_0x8005, 6
+# 1095 "data/maps/LittlerootTown/scripts.pory"
+	setvar VAR_0x8006, 4
+# 1096 "data/maps/LittlerootTown/scripts.pory"
+	setvar VAR_0x8007, 4
+# 1097 "data/maps/LittlerootTown/scripts.pory"
+	special ShakeCamera
+# 1098 "data/maps/LittlerootTown/scripts.pory"
+	waitstate
+# 1099 "data/maps/LittlerootTown/scripts.pory"
+	delay 60
+	return
+
+
+LittlerootTown_ActionScript_WonOrCaught::
+# 1103 "data/maps/LittlerootTown/scripts.pory"
+	fadescreen FADE_TO_BLACK
+# 1104 "data/maps/LittlerootTown/scripts.pory"
+	removeobject 10
+# 1105 "data/maps/LittlerootTown/scripts.pory"
+	fadescreen FADE_FROM_BLACK
+# 1106 "data/maps/LittlerootTown/scripts.pory"
 	msgbox LittlerootTown_ActionScript_WonOrCaught_Text_0
 	return
 
 
 LittlerootTown_ActionScript_RanAway::
-# 1098 "data/maps/LittlerootTown/scripts.pory"
+# 1111 "data/maps/LittlerootTown/scripts.pory"
 	playmoncry SPECIES_GROUDON, CRY_MODE_ENCOUNTER
-# 1099 "data/maps/LittlerootTown/scripts.pory"
+# 1112 "data/maps/LittlerootTown/scripts.pory"
 	msgbox LittlerootTown_ActionScript_RanAway_Text_0, MSGBOX_AUTOCLOSE
-# 1100 "data/maps/LittlerootTown/scripts.pory"
+# 1113 "data/maps/LittlerootTown/scripts.pory"
 	delay 20
-# 1101 "data/maps/LittlerootTown/scripts.pory"
+# 1114 "data/maps/LittlerootTown/scripts.pory"
 	fadescreen FADE_TO_BLACK
-# 1102 "data/maps/LittlerootTown/scripts.pory"
+# 1115 "data/maps/LittlerootTown/scripts.pory"
 	removeobject 10
-# 1103 "data/maps/LittlerootTown/scripts.pory"
+# 1116 "data/maps/LittlerootTown/scripts.pory"
 	fadescreen FADE_FROM_BLACK
-# 1104 "data/maps/LittlerootTown/scripts.pory"
+# 1117 "data/maps/LittlerootTown/scripts.pory"
 	msgbox LittlerootTown_ActionScript_RanAway_Text_1
 	return
 
 
-LittlerootTown_TriggerScript_BlockPath::
-# 1109 "data/maps/LittlerootTown/scripts.pory"
-	lockall
-# 1110 "data/maps/LittlerootTown/scripts.pory"
-	msgbox LittlerootTown_TriggerScript_BlockPath_Text_0
-# 1111 "data/maps/LittlerootTown/scripts.pory"
-	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_MovementScript_StopPlayer
-# 1112 "data/maps/LittlerootTown/scripts.pory"
+LittlerootTown_TriggerScript_GroudonTrigger::
+# 1122 "data/maps/LittlerootTown/scripts.pory"
+	setweather WEATHER_DROUGHT
+# 1123 "data/maps/LittlerootTown/scripts.pory"
+	doweather
+# 1124 "data/maps/LittlerootTown/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_MovementScript_InitiateGroudon
+# 1125 "data/maps/LittlerootTown/scripts.pory"
 	waitmovement 0
-# 1113 "data/maps/LittlerootTown/scripts.pory"
+# 1126 "data/maps/LittlerootTown/scripts.pory"
+	call LittlerootTown_ActionScript_GroudonShake
+# 1127 "data/maps/LittlerootTown/scripts.pory"
+	applymovement 10, LittlerootTown_MovementScript_GroudonMove
+# 1128 "data/maps/LittlerootTown/scripts.pory"
+	waitmovement 0
+# 1129 "data/maps/LittlerootTown/scripts.pory"
+	call LittlerootTown_ActionScript_GroudonShake
+# 1130 "data/maps/LittlerootTown/scripts.pory"
+	applymovement 10, LittlerootTown_MovementScript_GroudonMove
+# 1131 "data/maps/LittlerootTown/scripts.pory"
+	waitmovement 0
+# 1132 "data/maps/LittlerootTown/scripts.pory"
+	setvar VAR_LITTLEROOT_STATE, 4
+# 1133 "data/maps/LittlerootTown/scripts.pory"
+	goto LittlerootTown_EncounterScript_GroudonOW
+	return
+
+
+LittlerootTown_TriggerScript_GroudonLeftTrigger::
+# 1137 "data/maps/LittlerootTown/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_MovementScript_StepLeft
+# 1138 "data/maps/LittlerootTown/scripts.pory"
+	waitmovement 0
+# 1139 "data/maps/LittlerootTown/scripts.pory"
+	goto LittlerootTown_TriggerScript_GroudonTrigger
+	return
+
+
+LittlerootTown_TriggerScript_GroudonRightTrigger::
+# 1143 "data/maps/LittlerootTown/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_MovementScript_StepRight
+# 1144 "data/maps/LittlerootTown/scripts.pory"
+	waitmovement 0
+# 1145 "data/maps/LittlerootTown/scripts.pory"
+	goto LittlerootTown_TriggerScript_GroudonTrigger
+	return
+
+
+LittlerootTown_TriggerScript_BlockPath::
+# 1149 "data/maps/LittlerootTown/scripts.pory"
+	lockall
+# 1150 "data/maps/LittlerootTown/scripts.pory"
+	msgbox LittlerootTown_TriggerScript_BlockPath_Text_0
+# 1151 "data/maps/LittlerootTown/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_MovementScript_StopPlayer
+# 1152 "data/maps/LittlerootTown/scripts.pory"
+	waitmovement 0
+# 1153 "data/maps/LittlerootTown/scripts.pory"
 	releaseall
 	return
 
 
 LittlerootTown_SignScript_Test::
-# 1117 "data/maps/LittlerootTown/scripts.pory"
+# 1157 "data/maps/LittlerootTown/scripts.pory"
 	lockall
-# 1118 "data/maps/LittlerootTown/scripts.pory"
+# 1158 "data/maps/LittlerootTown/scripts.pory"
 	msgbox LittlerootTown_SignScript_Test_Text_0
-# 1119 "data/maps/LittlerootTown/scripts.pory"
+# 1159 "data/maps/LittlerootTown/scripts.pory"
 	releaseall
 	end
 
 
 LittlerootTown_SignScript_TestProfLab::
-# 1124 "data/maps/LittlerootTown/scripts.pory"
+# 1164 "data/maps/LittlerootTown/scripts.pory"
 	lockall
-# 1125 "data/maps/LittlerootTown/scripts.pory"
+# 1165 "data/maps/LittlerootTown/scripts.pory"
 	msgbox LittlerootTown_SignScript_TestProfLab_Text_0
-# 1126 "data/maps/LittlerootTown/scripts.pory"
+# 1166 "data/maps/LittlerootTown/scripts.pory"
 	releaseall
 	end
 
 
-# 1130 "data/maps/LittlerootTown/scripts.pory"
-LittlerootTown_MovementScript_BrendanLeaving:
-# 1131 "data/maps/LittlerootTown/scripts.pory"
-	face_down
-# 1132 "data/maps/LittlerootTown/scripts.pory"
+# 1170 "data/maps/LittlerootTown/scripts.pory"
+LittlerootTown_MovementScript_GroudonMove:
+# 1171 "data/maps/LittlerootTown/scripts.pory"
 	walk_down
-# 1133 "data/maps/LittlerootTown/scripts.pory"
-	walk_left
-# 1133 "data/maps/LittlerootTown/scripts.pory"
-	walk_left
-# 1133 "data/maps/LittlerootTown/scripts.pory"
-	walk_left
-# 1133 "data/maps/LittlerootTown/scripts.pory"
-	walk_left
-# 1133 "data/maps/LittlerootTown/scripts.pory"
-	walk_left
-# 1133 "data/maps/LittlerootTown/scripts.pory"
-	walk_left
-# 1133 "data/maps/LittlerootTown/scripts.pory"
-	walk_left
-# 1133 "data/maps/LittlerootTown/scripts.pory"
-	walk_left
-# 1133 "data/maps/LittlerootTown/scripts.pory"
-	walk_left
-# 1133 "data/maps/LittlerootTown/scripts.pory"
-	walk_left
-# 1133 "data/maps/LittlerootTown/scripts.pory"
-	walk_left
-# 1134 "data/maps/LittlerootTown/scripts.pory"
+	step_end
+
+# 1174 "data/maps/LittlerootTown/scripts.pory"
+LittlerootTown_MovementScript_InitiateGroudon:
+# 1175 "data/maps/LittlerootTown/scripts.pory"
 	walk_up
-# 1134 "data/maps/LittlerootTown/scripts.pory"
+# 1175 "data/maps/LittlerootTown/scripts.pory"
 	walk_up
 	step_end
 
-# 1137 "data/maps/LittlerootTown/scripts.pory"
+# 1178 "data/maps/LittlerootTown/scripts.pory"
+LittlerootTown_MovementScript_StepLeft:
+# 1179 "data/maps/LittlerootTown/scripts.pory"
+	walk_right
+# 1180 "data/maps/LittlerootTown/scripts.pory"
+	face_up
+	step_end
+
+# 1183 "data/maps/LittlerootTown/scripts.pory"
+LittlerootTown_MovementScript_StepRight:
+# 1184 "data/maps/LittlerootTown/scripts.pory"
+	walk_left
+# 1185 "data/maps/LittlerootTown/scripts.pory"
+	face_up
+	step_end
+
+# 1188 "data/maps/LittlerootTown/scripts.pory"
+LittlerootTown_MovementScript_BrendanLeaving:
+# 1189 "data/maps/LittlerootTown/scripts.pory"
+	face_down
+# 1190 "data/maps/LittlerootTown/scripts.pory"
+	walk_down
+# 1191 "data/maps/LittlerootTown/scripts.pory"
+	walk_left
+# 1191 "data/maps/LittlerootTown/scripts.pory"
+	walk_left
+# 1191 "data/maps/LittlerootTown/scripts.pory"
+	walk_left
+# 1191 "data/maps/LittlerootTown/scripts.pory"
+	walk_left
+# 1191 "data/maps/LittlerootTown/scripts.pory"
+	walk_left
+# 1191 "data/maps/LittlerootTown/scripts.pory"
+	walk_left
+# 1191 "data/maps/LittlerootTown/scripts.pory"
+	walk_left
+# 1191 "data/maps/LittlerootTown/scripts.pory"
+	walk_left
+# 1191 "data/maps/LittlerootTown/scripts.pory"
+	walk_left
+# 1191 "data/maps/LittlerootTown/scripts.pory"
+	walk_left
+# 1191 "data/maps/LittlerootTown/scripts.pory"
+	walk_left
+# 1192 "data/maps/LittlerootTown/scripts.pory"
+	walk_up
+# 1192 "data/maps/LittlerootTown/scripts.pory"
+	walk_up
+	step_end
+
+# 1195 "data/maps/LittlerootTown/scripts.pory"
 LittlerootTown_MovementScript_BrendanEnterDoor:
-# 1138 "data/maps/LittlerootTown/scripts.pory"
+# 1196 "data/maps/LittlerootTown/scripts.pory"
 	walk_up
 	step_end
 
-# 1141 "data/maps/LittlerootTown/scripts.pory"
+# 1199 "data/maps/LittlerootTown/scripts.pory"
 LittlerootTown_MovementScript_PostBrendanCamRevert:
-# 1142 "data/maps/LittlerootTown/scripts.pory"
+# 1200 "data/maps/LittlerootTown/scripts.pory"
 	walk_fast_right
-# 1142 "data/maps/LittlerootTown/scripts.pory"
+# 1200 "data/maps/LittlerootTown/scripts.pory"
 	walk_fast_right
-# 1142 "data/maps/LittlerootTown/scripts.pory"
+# 1200 "data/maps/LittlerootTown/scripts.pory"
 	walk_fast_right
-# 1142 "data/maps/LittlerootTown/scripts.pory"
+# 1200 "data/maps/LittlerootTown/scripts.pory"
 	walk_fast_right
-# 1142 "data/maps/LittlerootTown/scripts.pory"
+# 1200 "data/maps/LittlerootTown/scripts.pory"
 	walk_fast_right
-# 1142 "data/maps/LittlerootTown/scripts.pory"
+# 1200 "data/maps/LittlerootTown/scripts.pory"
 	walk_fast_right
-# 1142 "data/maps/LittlerootTown/scripts.pory"
+# 1200 "data/maps/LittlerootTown/scripts.pory"
 	walk_fast_right
-# 1142 "data/maps/LittlerootTown/scripts.pory"
+# 1200 "data/maps/LittlerootTown/scripts.pory"
 	walk_fast_right
-# 1142 "data/maps/LittlerootTown/scripts.pory"
+# 1200 "data/maps/LittlerootTown/scripts.pory"
 	walk_fast_right
-# 1142 "data/maps/LittlerootTown/scripts.pory"
+# 1200 "data/maps/LittlerootTown/scripts.pory"
 	walk_fast_right
-# 1143 "data/maps/LittlerootTown/scripts.pory"
+# 1201 "data/maps/LittlerootTown/scripts.pory"
 	walk_diag_southeast
 	step_end
 
-# 1146 "data/maps/LittlerootTown/scripts.pory"
+# 1204 "data/maps/LittlerootTown/scripts.pory"
 LittlerootTown_MovementScript_StopPlayer:
-# 1147 "data/maps/LittlerootTown/scripts.pory"
+# 1205 "data/maps/LittlerootTown/scripts.pory"
 	walk_down
 	step_end
 
 LittlerootTown_ActionScript_WonOrCaught_Text_0:
-# 1093 "data/maps/LittlerootTown/scripts.pory"
+# 1106 "data/maps/LittlerootTown/scripts.pory"
 	.string "You are the Pokemon Master!$"
 
 LittlerootTown_ActionScript_RanAway_Text_0:
-# 1099 "data/maps/LittlerootTown/scripts.pory"
+# 1112 "data/maps/LittlerootTown/scripts.pory"
 	.string "Grouuu...$"
 
 LittlerootTown_ActionScript_RanAway_Text_1:
-# 1104 "data/maps/LittlerootTown/scripts.pory"
+# 1117 "data/maps/LittlerootTown/scripts.pory"
 	.string "You are not the Pokemon Master!$"
 
 LittlerootTown_TriggerScript_BlockPath_Text_0:
-# 1110 "data/maps/LittlerootTown/scripts.pory"
+# 1150 "data/maps/LittlerootTown/scripts.pory"
 	.string "You don't have a Pokemon yet!$"
 
 LittlerootTown_SignScript_Test_Text_0:
-# 1118 "data/maps/LittlerootTown/scripts.pory"
+# 1158 "data/maps/LittlerootTown/scripts.pory"
 	.string "Testing 123...$"
 
 LittlerootTown_SignScript_TestProfLab_Text_0:
-# 1125 "data/maps/LittlerootTown/scripts.pory"
+# 1165 "data/maps/LittlerootTown/scripts.pory"
 	.string "Test Professor's Lab$"
 
 LittlerootTown_TextScript_BrendanIntro::
-# 1150 "data/maps/LittlerootTown/scripts.pory"
+# 1208 "data/maps/LittlerootTown/scripts.pory"
 	.string "You'll never win!$"
 
 LittlerootTown_TextScript_BrendanOutro::
-# 1154 "data/maps/LittlerootTown/scripts.pory"
+# 1212 "data/maps/LittlerootTown/scripts.pory"
 	.string "Damn, bro...$"
 
 LittlerootTown_TextScript_BrendanPostBattle::
-# 1158 "data/maps/LittlerootTown/scripts.pory"
+# 1216 "data/maps/LittlerootTown/scripts.pory"
 	.string "I'll win next time!$"

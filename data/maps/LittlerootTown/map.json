@@ -301,6 +301,33 @@
       "var": "VAR_LITTLEROOT_STATE",
       "var_value": "0",
       "script": "LittlerootTown_TriggerScript_BlockPath"
+    },
+    {
+      "type": "trigger",
+      "x": 34,
+      "y": 12,
+      "elevation": 0,
+      "var": "VAR_LITTLEROOT_STATE",
+      "var_value": "3",
+      "script": "LittlerootTown_TriggerScript_GroudonTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 33,
+      "y": 12,
+      "elevation": 0,
+      "var": "VAR_LITTLEROOT_STATE",
+      "var_value": "3",
+      "script": "LittlerootTown_TriggerScript_GroudonLeftTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 35,
+      "y": 12,
+      "elevation": 0,
+      "var": "VAR_LITTLEROOT_STATE",
+      "var_value": "3",
+      "script": "LittlerootTown_TriggerScript_GroudonRightTrigger"
     }
   ],
   "bg_events": [

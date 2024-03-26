@@ -141,6 +141,7 @@ script TestProfLab_ActionScript_GiveStarter{
         setflag(FLAG_SYS_POKEMON_GET)
         setvar(VAR_LITTLEROOT_STATE, 2)
         givemon(VAR_STARTER_CHOICE, 5, ITEM_ORAN_BERRY)
+        call(TestProfLab_ActionScript_BallToRemove)
         if(var(VAR_RESULT) == MON_GIVEN_TO_PARTY){
             playfanfare(MUS_OBTAIN_ITEM)
             msgbox("Received {STR_VAR_1}!")
@@ -164,6 +165,21 @@ script TestProfLab_ActionScript_GiveStarter{
     else{
         hidemonpic
         msgbox(TestProfLab_TextScript_NotChosen)
+    }
+}
+
+script TestProfLab_ActionScript_BallToRemove{
+    if(var(VAR_TEMP_0) == 1){
+        removeobject(2)
+        return
+    }
+    if(var(VAR_TEMP_0) == 2){
+        removeobject(3)
+        return
+    }
+    if(var(VAR_TEMP_0) == 3){
+        removeobject(4)
+        return
     }
 }
 

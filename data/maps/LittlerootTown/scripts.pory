@@ -1167,6 +1167,15 @@ script LittlerootTown_SignScript_TestProfLab{
 	end
 }
 
+script LittlerootTown_SignScript_GetElevation{
+	lock
+	specialvar(VAR_RESULT, PlayerGetElevation)
+	buffernumberstring(STR_VAR_1, VAR_RESULT)
+	msgbox("Elevation is: {STR_VAR_1}.")
+	release
+	end
+}
+
 movement LittlerootTown_MovementScript_GroudonMove{
 	walk_down
 }

@@ -354,6 +354,33 @@
       "var": "VAR_LITTLEROOT_STATE",
       "var_value": "3",
       "script": "LittlerootTown_TriggerScript_GroudonRightTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 33,
+      "y": 13,
+      "elevation": 0,
+      "var": "VAR_LITTLEROOT_STATE",
+      "var_value": "0",
+      "script": "LittlerootTown_TriggerScript_BlockPath"
+    },
+    {
+      "type": "trigger",
+      "x": 34,
+      "y": 13,
+      "elevation": 0,
+      "var": "VAR_LITTLEROOT_STATE",
+      "var_value": "0",
+      "script": "LittlerootTown_TriggerScript_BlockPath"
+    },
+    {
+      "type": "trigger",
+      "x": 35,
+      "y": 13,
+      "elevation": 0,
+      "var": "VAR_LITTLEROOT_STATE",
+      "var_value": "0",
+      "script": "LittlerootTown_TriggerScript_BlockPath"
     }
   ],
   "bg_events": [
@@ -404,6 +431,22 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "LittlerootTown_SignScript_TestProfLab"
+    },
+    {
+      "type": "sign",
+      "x": 32,
+      "y": 9,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "LittlerootTown_SignScript_GetElevation"
+    },
+    {
+      "type": "sign",
+      "x": 32,
+      "y": 13,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "LittlerootTown_SignScript_GetElevation"
     }
   ]
 }

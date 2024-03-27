@@ -1165,6 +1165,7 @@ u8 GetPlayerFacingDirection(void)
     return gObjectEvents[gPlayerAvatar.objectEventId].facingDirection;
 }
 
+// now used for a scripting special
 u8 GetPlayerMovementDirection(void)
 {
     return gObjectEvents[gPlayerAvatar.objectEventId].movementDirection;

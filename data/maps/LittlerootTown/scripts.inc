@@ -2228,39 +2228,53 @@ LittlerootTown_SignScript_TestProfLab::
 	end
 
 
-# 1170 "data/maps/LittlerootTown/scripts.pory"
-LittlerootTown_MovementScript_GroudonMove:
+LittlerootTown_SignScript_GetElevation::
 # 1171 "data/maps/LittlerootTown/scripts.pory"
+	lock
+# 1172 "data/maps/LittlerootTown/scripts.pory"
+	specialvar VAR_RESULT, PlayerGetElevation
+# 1173 "data/maps/LittlerootTown/scripts.pory"
+	buffernumberstring STR_VAR_1, VAR_RESULT
+# 1174 "data/maps/LittlerootTown/scripts.pory"
+	msgbox LittlerootTown_SignScript_GetElevation_Text_0
+# 1175 "data/maps/LittlerootTown/scripts.pory"
+	release
+	end
+
+
+# 1179 "data/maps/LittlerootTown/scripts.pory"
+LittlerootTown_MovementScript_GroudonMove:
+# 1180 "data/maps/LittlerootTown/scripts.pory"
 	walk_down
 	step_end
 
-# 1174 "data/maps/LittlerootTown/scripts.pory"
-LittlerootTown_MovementScript_InitiateGroudon:
-# 1175 "data/maps/LittlerootTown/scripts.pory"
-	walk_up
-# 1175 "data/maps/LittlerootTown/scripts.pory"
-	walk_up
-	step_end
-
-# 1178 "data/maps/LittlerootTown/scripts.pory"
-LittlerootTown_MovementScript_StepLeft:
-# 1179 "data/maps/LittlerootTown/scripts.pory"
-	walk_right
-# 1180 "data/maps/LittlerootTown/scripts.pory"
-	face_up
-	step_end
-
 # 1183 "data/maps/LittlerootTown/scripts.pory"
-LittlerootTown_MovementScript_StepRight:
+LittlerootTown_MovementScript_InitiateGroudon:
 # 1184 "data/maps/LittlerootTown/scripts.pory"
-	walk_left
-# 1185 "data/maps/LittlerootTown/scripts.pory"
+	walk_up
+# 1184 "data/maps/LittlerootTown/scripts.pory"
+	walk_up
+	step_end
+
+# 1187 "data/maps/LittlerootTown/scripts.pory"
+LittlerootTown_MovementScript_StepLeft:
+# 1188 "data/maps/LittlerootTown/scripts.pory"
+	walk_right
+# 1189 "data/maps/LittlerootTown/scripts.pory"
 	face_up
 	step_end
 
-# 1204 "data/maps/LittlerootTown/scripts.pory"
+# 1192 "data/maps/LittlerootTown/scripts.pory"
+LittlerootTown_MovementScript_StepRight:
+# 1193 "data/maps/LittlerootTown/scripts.pory"
+	walk_left
+# 1194 "data/maps/LittlerootTown/scripts.pory"
+	face_up
+	step_end
+
+# 1213 "data/maps/LittlerootTown/scripts.pory"
 LittlerootTown_MovementScript_StopPlayer:
-# 1205 "data/maps/LittlerootTown/scripts.pory"
+# 1214 "data/maps/LittlerootTown/scripts.pory"
 	walk_down
 	step_end
 
@@ -2287,3 +2301,7 @@ LittlerootTown_SignScript_Test_Text_0:
 LittlerootTown_SignScript_TestProfLab_Text_0:
 # 1165 "data/maps/LittlerootTown/scripts.pory"
 	.string "Test Professor's Lab$"
+
+LittlerootTown_SignScript_GetElevation_Text_0:
+# 1174 "data/maps/LittlerootTown/scripts.pory"
+	.string "Elevation is: {STR_VAR_1}.$"

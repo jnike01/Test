@@ -52,7 +52,7 @@ LittlerootTown_OnTransition:
 	call_if_eq VAR_LITTLEROOT_RIVAL_STATE, 3, LittlerootTown_EventScript_SetRivalLeftForRoute103
 	call_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 1, LittlerootTown_EventScript_HideMapNamePopup
 	call_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2, LittlerootTown_EventScript_LeftLabAfterDexUpgrade
-	call_if_unset FLAG_BRENDAN_TRANSITION, LittlerootTown_ControlScript_BrendanState
+	//call_if_unset FLAG_BRENDAN_TRANSITION, LittlerootTown_ControlScript_BrendanState
 	end
 
 LittlerootTown_EventScript_LeftLabAfterDexUpgrade::
@@ -1023,46 +1023,46 @@ LittlerootTown_Text_BirchSomethingToShowYouAtLab:
 
 `
 
-script LittlerootTown_ControlScript_BrendanState{
-	if(!(flag(FLAG_SYS_POKEMON_GET))){
-		setflag(FLAG_TEST_BRENDAN)
-		setvar(VAR_LITTLEROOT_STATE, 0)
-	}
-	else{
-		if(var(VAR_LITTLEROOT_STATE) == 2){
-			clearflag(FLAG_TEST_BRENDAN)
-		}
-	}
-}
+//script LittlerootTown_ControlScript_BrendanState{
+//	if(!(flag(FLAG_SYS_POKEMON_GET))){
+//		setflag(FLAG_TEST_BRENDAN)
+//		setvar(VAR_LITTLEROOT_STATE, 0)
+//	}
+//	else{
+//		if(var(VAR_LITTLEROOT_STATE) == 2){
+//			clearflag(FLAG_TEST_BRENDAN)
+//		}
+//	}
+//}
 
-script LittlerootTown_TrainerScript_BrendanBattle{
-	trainerbattle_single(TRAINER_BRENDAN_ROUTE_103_TORCHIC, LittlerootTown_TextScript_BrendanIntro, LittlerootTown_TextScript_BrendanOutro, LittlerootTown_ActionScript_BrendanAftermath)
-	msgbox(LittlerootTown_TextScript_BrendanPostBattle, MSGBOX_AUTOCLOSE)
-	waitmessage
-	end
-}
+//script LittlerootTown_TrainerScript_BrendanBattle{
+//	trainerbattle_single(TRAINER_BRENDAN_ROUTE_103_TORCHIC, LittlerootTown_TextScript_BrendanIntro, LittlerootTown_TextScript_BrendanOutro, LittlerootTown_ActionScript_BrendanAftermath)
+//	msgbox(LittlerootTown_TextScript_BrendanPostBattle, MSGBOX_AUTOCLOSE)
+//	waitmessage
+//	end
+//}
 
-script LittlerootTown_ActionScript_BrendanAftermath{
-	lockall
-	applymovement(9, LittlerootTown_MovementScript_BrendanLeaving)
-	special(SpawnCameraObject)
-	applymovement(OBJ_EVENT_ID_CAMERA, LittlerootTown_MovementScript_BrendanLeaving)
-	waitmovement(0)
-	opendoor(14, 8)
-	waitdooranim
-	applymovement(9, LittlerootTown_MovementScript_BrendanEnterDoor)
-	waitmovement(0)
-	removeobject(9)
-	closedoor(14, 8)
-	waitdooranim
-	applymovement(OBJ_EVENT_ID_CAMERA, LittlerootTown_MovementScript_PostBrendanCamRevert)
-	waitmovement(0)
-	special(RemoveCameraObject)
-	setflag(FLAG_TEST_BRENDAN)
-	setvar(VAR_LITTLEROOT_STATE, 3)
-	setflag(FLAG_BRENDAN_TRANSITION)
-	releaseall
-}
+//script LittlerootTown_ActionScript_BrendanAftermath{
+//	lockall
+//	applymovement(9, LittlerootTown_MovementScript_BrendanLeaving)
+//	special(SpawnCameraObject)
+//	applymovement(OBJ_EVENT_ID_CAMERA, LittlerootTown_MovementScript_BrendanLeaving)
+//	waitmovement(0)
+//	opendoor(14, 8)
+//	waitdooranim
+//	applymovement(9, LittlerootTown_MovementScript_BrendanEnterDoor)
+//	waitmovement(0)
+//	removeobject(9)
+//	closedoor(14, 8)
+//	waitdooranim
+//	applymovement(OBJ_EVENT_ID_CAMERA, LittlerootTown_MovementScript_PostBrendanCamRevert)
+//	waitmovement(0)
+//	special(RemoveCameraObject)
+//	setflag(FLAG_TEST_BRENDAN)
+//	setvar(VAR_LITTLEROOT_STATE, 3)
+//	setflag(FLAG_BRENDAN_TRANSITION)
+//	releaseall
+//}
 
 script LittlerootTown_EncounterScript_GroudonOW{
 	lockall
@@ -1101,7 +1101,7 @@ script LittlerootTown_ActionScript_GroudonShake{
 
 script LittlerootTown_ActionScript_WonOrCaught{
 	fadescreen(FADE_TO_BLACK)
-	removeobject(10)
+	removeobject(9)
 	fadescreen(FADE_FROM_BLACK)
 	msgbox("You are the Pokemon Master!")
 	return
@@ -1112,7 +1112,7 @@ script LittlerootTown_ActionScript_RanAway{
 	msgbox("Grouuu...", MSGBOX_AUTOCLOSE)
 	delay(20)
 	fadescreen(FADE_TO_BLACK)
-	removeobject(10)
+	removeobject(9)
 	fadescreen(FADE_FROM_BLACK)
 	msgbox("You are not the Pokemon Master!")
 	return
@@ -1124,10 +1124,10 @@ script LittlerootTown_TriggerScript_GroudonTrigger{
 	applymovement(OBJ_EVENT_ID_PLAYER, LittlerootTown_MovementScript_InitiateGroudon)
 	waitmovement(0)
 	call(LittlerootTown_ActionScript_GroudonShake)
-	applymovement(10, LittlerootTown_MovementScript_GroudonMove)
+	applymovement(9, LittlerootTown_MovementScript_GroudonMove)
 	waitmovement(0)
 	call(LittlerootTown_ActionScript_GroudonShake)
-	applymovement(10, LittlerootTown_MovementScript_GroudonMove)
+	applymovement(9, LittlerootTown_MovementScript_GroudonMove)
 	waitmovement(0)
 	setvar(VAR_LITTLEROOT_STATE, 4)
 	goto(LittlerootTown_EncounterScript_GroudonOW)
@@ -1185,34 +1185,34 @@ movement LittlerootTown_MovementScript_StepRight{
 	face_up
 }
 
-movement LittlerootTown_MovementScript_BrendanLeaving{
-	face_down
-	walk_down
-	walk_left * 11
-	walk_up * 2
-}
+//movement LittlerootTown_MovementScript_BrendanLeaving{
+//	face_down
+//	walk_down
+//	walk_left * 11
+//	walk_up * 2
+//}
 
-movement LittlerootTown_MovementScript_BrendanEnterDoor{
-	walk_up
-}
+//movement LittlerootTown_MovementScript_BrendanEnterDoor{
+//	walk_up
+//}
 
-movement LittlerootTown_MovementScript_PostBrendanCamRevert{
-	walk_fast_right * 10
-	walk_diag_southeast
-}
+//movement LittlerootTown_MovementScript_PostBrendanCamRevert{
+//	walk_fast_right * 10
+//	walk_diag_southeast
+//}
 
 movement LittlerootTown_MovementScript_StopPlayer{
 	walk_down
 }
 
-text LittlerootTown_TextScript_BrendanIntro{
-	"You'll never win!"
-}
+//text LittlerootTown_TextScript_BrendanIntro{
+//	"You'll never win!"
+//}
 
-text LittlerootTown_TextScript_BrendanOutro{
-	"Damn, bro..."
-}
+//text LittlerootTown_TextScript_BrendanOutro{
+//	"Damn, bro..."
+//}
 
-text LittlerootTown_TextScript_BrendanPostBattle{
-	"I'll win next time!"
-}
+//text LittlerootTown_TextScript_BrendanPostBattle{
+//	"I'll win next time!"
+//}

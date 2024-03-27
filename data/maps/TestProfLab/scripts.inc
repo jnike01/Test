@@ -6,715 +6,832 @@ TestProfLab_MapScripts::
 
 TestProfLab_ControlScript_ControlState::
 # 7 "data/maps/TestProfLab/scripts.pory"
+	removeobject 5
+# 8 "data/maps/TestProfLab/scripts.pory"
 	setvar VAR_TESTPROFLAB_CONTROLSTATE, 0
+# 9 "data/maps/TestProfLab/scripts.pory"
+	call Common_EventScript_SetupRivalGfxId
 	return
 
 
 TestProfLab_PersonScript_TestProf::
-# 11 "data/maps/TestProfLab/scripts.pory"
+# 13 "data/maps/TestProfLab/scripts.pory"
 	goto_if_unset FLAG_SYS_POKEMON_GET, TestProfLab_PersonScript_TestProf_2
-# 34 "data/maps/TestProfLab/scripts.pory"
-	lock
-# 35 "data/maps/TestProfLab/scripts.pory"
-	faceplayer
 # 36 "data/maps/TestProfLab/scripts.pory"
+	lock
+# 37 "data/maps/TestProfLab/scripts.pory"
+	faceplayer
+# 38 "data/maps/TestProfLab/scripts.pory"
 	goto_if_set FLAG_SYS_POKEDEX_GET, TestProfLab_PersonScript_TestProf_15
 TestProfLab_PersonScript_TestProf_14:
-# 46 "data/maps/TestProfLab/scripts.pory"
+# 48 "data/maps/TestProfLab/scripts.pory"
 	msgbox TestProfLab_PersonScript_TestProf_Text_3, MSGBOX_NPC
 TestProfLab_PersonScript_TestProf_12:
-# 48 "data/maps/TestProfLab/scripts.pory"
+# 50 "data/maps/TestProfLab/scripts.pory"
 	release
 TestProfLab_PersonScript_TestProf_1:
 	end
 
 TestProfLab_PersonScript_TestProf_2:
-# 12 "data/maps/TestProfLab/scripts.pory"
-	lock
-# 13 "data/maps/TestProfLab/scripts.pory"
-	faceplayer
 # 14 "data/maps/TestProfLab/scripts.pory"
-	message TestProfLab_PersonScript_TestProf_Text_0
+	lock
 # 15 "data/maps/TestProfLab/scripts.pory"
-	multichoice 25, 5, MULTI_STARTER_CHOICE, 0
+	faceplayer
 # 16 "data/maps/TestProfLab/scripts.pory"
-	closemessage
+	message TestProfLab_PersonScript_TestProf_Text_0
 # 17 "data/maps/TestProfLab/scripts.pory"
+	multichoice 25, 5, MULTI_STARTER_CHOICE, 0
+# 18 "data/maps/TestProfLab/scripts.pory"
+	closemessage
+# 19 "data/maps/TestProfLab/scripts.pory"
 	compare VAR_RESULT, 0
 	goto_if_eq TestProfLab_PersonScript_TestProf_6
-# 21 "data/maps/TestProfLab/scripts.pory"
+# 23 "data/maps/TestProfLab/scripts.pory"
 	compare VAR_RESULT, 1
 	goto_if_eq TestProfLab_PersonScript_TestProf_7
-# 25 "data/maps/TestProfLab/scripts.pory"
+# 27 "data/maps/TestProfLab/scripts.pory"
 	compare VAR_RESULT, 2
 	goto_if_eq TestProfLab_PersonScript_TestProf_8
 TestProfLab_PersonScript_TestProf_5:
-# 29 "data/maps/TestProfLab/scripts.pory"
-	msgbox TestProfLab_PersonScript_TestProf_Text_1
-# 30 "data/maps/TestProfLab/scripts.pory"
-	waitmessage
 # 31 "data/maps/TestProfLab/scripts.pory"
+	msgbox TestProfLab_PersonScript_TestProf_Text_1
+# 32 "data/maps/TestProfLab/scripts.pory"
+	waitmessage
+# 33 "data/maps/TestProfLab/scripts.pory"
 	release
 	goto TestProfLab_PersonScript_TestProf_1
 
 TestProfLab_PersonScript_TestProf_6:
-# 18 "data/maps/TestProfLab/scripts.pory"
+# 20 "data/maps/TestProfLab/scripts.pory"
 	call TestProfLab_ActionScript_StarterFade
-# 19 "data/maps/TestProfLab/scripts.pory"
+# 21 "data/maps/TestProfLab/scripts.pory"
 	setvar VAR_TESTPROFLAB_CONTROLSTATE, 2
 	goto TestProfLab_PersonScript_TestProf_5
 
 TestProfLab_PersonScript_TestProf_7:
-# 22 "data/maps/TestProfLab/scripts.pory"
+# 24 "data/maps/TestProfLab/scripts.pory"
 	call TestProfLab_ActionScript_StarterFade
-# 23 "data/maps/TestProfLab/scripts.pory"
+# 25 "data/maps/TestProfLab/scripts.pory"
 	setvar VAR_TESTPROFLAB_CONTROLSTATE, 1
 	goto TestProfLab_PersonScript_TestProf_5
 
 TestProfLab_PersonScript_TestProf_8:
-# 26 "data/maps/TestProfLab/scripts.pory"
+# 28 "data/maps/TestProfLab/scripts.pory"
 	call TestProfLab_ActionScript_StarterFade
-# 27 "data/maps/TestProfLab/scripts.pory"
+# 29 "data/maps/TestProfLab/scripts.pory"
 	setvar VAR_TESTPROFLAB_CONTROLSTATE, 0
 	goto TestProfLab_PersonScript_TestProf_5
 
 TestProfLab_PersonScript_TestProf_13:
-# 37 "data/maps/TestProfLab/scripts.pory"
+# 39 "data/maps/TestProfLab/scripts.pory"
 	msgbox TestProfLab_PersonScript_TestProf_Text_2, MSGBOX_YESNO
-# 38 "data/maps/TestProfLab/scripts.pory"
+# 40 "data/maps/TestProfLab/scripts.pory"
 	compare VAR_RESULT, YES
 	goto_if_eq TestProfLab_PersonScript_TestProf_18
-# 42 "data/maps/TestProfLab/scripts.pory"
+# 44 "data/maps/TestProfLab/scripts.pory"
 	msgbox TestProfLab_PersonScript_TestProf_Text_3, MSGBOX_NPC
 	goto TestProfLab_PersonScript_TestProf_12
 
 TestProfLab_PersonScript_TestProf_15:
-# 36 "data/maps/TestProfLab/scripts.pory"
+# 38 "data/maps/TestProfLab/scripts.pory"
 	goto_if_unset FLAG_SYS_NATIONAL_DEX, TestProfLab_PersonScript_TestProf_13
 	goto TestProfLab_PersonScript_TestProf_14
 
 TestProfLab_PersonScript_TestProf_18:
-# 39 "data/maps/TestProfLab/scripts.pory"
+# 41 "data/maps/TestProfLab/scripts.pory"
 	call TestProfLab_ActionScript_UpgradeToNatDex
 	goto TestProfLab_PersonScript_TestProf_12
 
 
 TestProfLab_ObjectScript_PokeballOne::
-# 54 "data/maps/TestProfLab/scripts.pory"
-	lock
-# 55 "data/maps/TestProfLab/scripts.pory"
-	setvar VAR_TEMP_0, 1
 # 56 "data/maps/TestProfLab/scripts.pory"
+	lock
+# 57 "data/maps/TestProfLab/scripts.pory"
+	setvar VAR_TEMP_0, 1
+# 58 "data/maps/TestProfLab/scripts.pory"
 	goto_if_unset FLAG_SYS_POKEMON_GET, TestProfLab_ObjectScript_PokeballOne_2
-# 74 "data/maps/TestProfLab/scripts.pory"
+# 76 "data/maps/TestProfLab/scripts.pory"
 	msgbox TestProfLab_ObjectScript_PokeballOne_Text_0
 TestProfLab_ObjectScript_PokeballOne_1:
-# 76 "data/maps/TestProfLab/scripts.pory"
+# 78 "data/maps/TestProfLab/scripts.pory"
 	waitmessage
-# 77 "data/maps/TestProfLab/scripts.pory"
+# 79 "data/maps/TestProfLab/scripts.pory"
 	release
 	end
 
 TestProfLab_ObjectScript_PokeballOne_2:
-# 57 "data/maps/TestProfLab/scripts.pory"
+# 59 "data/maps/TestProfLab/scripts.pory"
 	compare VAR_TESTPROFLAB_CONTROLSTATE, 0
 	goto_if_eq TestProfLab_ObjectScript_PokeballOne_5
-# 62 "data/maps/TestProfLab/scripts.pory"
+# 64 "data/maps/TestProfLab/scripts.pory"
 	compare VAR_TESTPROFLAB_CONTROLSTATE, 1
 	goto_if_eq TestProfLab_ObjectScript_PokeballOne_6
-# 67 "data/maps/TestProfLab/scripts.pory"
+# 69 "data/maps/TestProfLab/scripts.pory"
 	compare VAR_TESTPROFLAB_CONTROLSTATE, 2
 	goto_if_eq TestProfLab_ObjectScript_PokeballOne_7
 	goto TestProfLab_ObjectScript_PokeballOne_1
 
 TestProfLab_ObjectScript_PokeballOne_5:
-# 58 "data/maps/TestProfLab/scripts.pory"
-	bufferspeciesname STR_VAR_1, SPECIES_MUDKIP
-# 59 "data/maps/TestProfLab/scripts.pory"
-	setvar VAR_STARTER_CHOICE, SPECIES_MUDKIP
 # 60 "data/maps/TestProfLab/scripts.pory"
+	bufferspeciesname STR_VAR_1, SPECIES_TREECKO
+# 61 "data/maps/TestProfLab/scripts.pory"
+	setvar VAR_STARTER_CHOICE, SPECIES_TREECKO
+# 62 "data/maps/TestProfLab/scripts.pory"
 	call TestProfLab_ActionScript_GiveStarter
 	goto TestProfLab_ObjectScript_PokeballOne_1
 
 TestProfLab_ObjectScript_PokeballOne_6:
-# 63 "data/maps/TestProfLab/scripts.pory"
-	bufferspeciesname STR_VAR_1, SPECIES_TOTODILE
-# 64 "data/maps/TestProfLab/scripts.pory"
-	setvar VAR_STARTER_CHOICE, SPECIES_TOTODILE
 # 65 "data/maps/TestProfLab/scripts.pory"
+	bufferspeciesname STR_VAR_1, SPECIES_CHIKORITA
+# 66 "data/maps/TestProfLab/scripts.pory"
+	setvar VAR_STARTER_CHOICE, SPECIES_CHIKORITA
+# 67 "data/maps/TestProfLab/scripts.pory"
 	call TestProfLab_ActionScript_GiveStarter
 	goto TestProfLab_ObjectScript_PokeballOne_1
 
 TestProfLab_ObjectScript_PokeballOne_7:
-# 68 "data/maps/TestProfLab/scripts.pory"
-	bufferspeciesname STR_VAR_1, SPECIES_SQUIRTLE
-# 69 "data/maps/TestProfLab/scripts.pory"
-	setvar VAR_STARTER_CHOICE, SPECIES_SQUIRTLE
 # 70 "data/maps/TestProfLab/scripts.pory"
+	bufferspeciesname STR_VAR_1, SPECIES_BULBASAUR
+# 71 "data/maps/TestProfLab/scripts.pory"
+	setvar VAR_STARTER_CHOICE, SPECIES_BULBASAUR
+# 72 "data/maps/TestProfLab/scripts.pory"
 	call TestProfLab_ActionScript_GiveStarter
 	goto TestProfLab_ObjectScript_PokeballOne_1
 
 
 TestProfLab_ObjectScript_PokeballTwo::
-# 82 "data/maps/TestProfLab/scripts.pory"
-	lock
-# 83 "data/maps/TestProfLab/scripts.pory"
-	setvar VAR_TEMP_0, 2
 # 84 "data/maps/TestProfLab/scripts.pory"
+	lock
+# 85 "data/maps/TestProfLab/scripts.pory"
+	setvar VAR_TEMP_0, 2
+# 86 "data/maps/TestProfLab/scripts.pory"
 	goto_if_unset FLAG_SYS_POKEMON_GET, TestProfLab_ObjectScript_PokeballTwo_2
-# 102 "data/maps/TestProfLab/scripts.pory"
+# 104 "data/maps/TestProfLab/scripts.pory"
 	msgbox TestProfLab_ObjectScript_PokeballOne_Text_0
 TestProfLab_ObjectScript_PokeballTwo_1:
-# 104 "data/maps/TestProfLab/scripts.pory"
+# 106 "data/maps/TestProfLab/scripts.pory"
 	waitmessage
-# 105 "data/maps/TestProfLab/scripts.pory"
+# 107 "data/maps/TestProfLab/scripts.pory"
 	release
 	end
 
 TestProfLab_ObjectScript_PokeballTwo_2:
-# 85 "data/maps/TestProfLab/scripts.pory"
+# 87 "data/maps/TestProfLab/scripts.pory"
 	compare VAR_TESTPROFLAB_CONTROLSTATE, 0
 	goto_if_eq TestProfLab_ObjectScript_PokeballTwo_5
-# 90 "data/maps/TestProfLab/scripts.pory"
+# 92 "data/maps/TestProfLab/scripts.pory"
 	compare VAR_TESTPROFLAB_CONTROLSTATE, 1
 	goto_if_eq TestProfLab_ObjectScript_PokeballTwo_6
-# 95 "data/maps/TestProfLab/scripts.pory"
+# 97 "data/maps/TestProfLab/scripts.pory"
 	compare VAR_TESTPROFLAB_CONTROLSTATE, 2
 	goto_if_eq TestProfLab_ObjectScript_PokeballTwo_7
 	goto TestProfLab_ObjectScript_PokeballTwo_1
 
 TestProfLab_ObjectScript_PokeballTwo_5:
-# 86 "data/maps/TestProfLab/scripts.pory"
-	bufferspeciesname STR_VAR_1, SPECIES_TREECKO
-# 87 "data/maps/TestProfLab/scripts.pory"
-	setvar VAR_STARTER_CHOICE, SPECIES_TREECKO
 # 88 "data/maps/TestProfLab/scripts.pory"
+	bufferspeciesname STR_VAR_1, SPECIES_MUDKIP
+# 89 "data/maps/TestProfLab/scripts.pory"
+	setvar VAR_STARTER_CHOICE, SPECIES_MUDKIP
+# 90 "data/maps/TestProfLab/scripts.pory"
 	call TestProfLab_ActionScript_GiveStarter
 	goto TestProfLab_ObjectScript_PokeballTwo_1
 
 TestProfLab_ObjectScript_PokeballTwo_6:
-# 91 "data/maps/TestProfLab/scripts.pory"
-	bufferspeciesname STR_VAR_1, SPECIES_CHIKORITA
-# 92 "data/maps/TestProfLab/scripts.pory"
-	setvar VAR_STARTER_CHOICE, SPECIES_CHIKORITA
 # 93 "data/maps/TestProfLab/scripts.pory"
+	bufferspeciesname STR_VAR_1, SPECIES_TOTODILE
+# 94 "data/maps/TestProfLab/scripts.pory"
+	setvar VAR_STARTER_CHOICE, SPECIES_TOTODILE
+# 95 "data/maps/TestProfLab/scripts.pory"
 	call TestProfLab_ActionScript_GiveStarter
 	goto TestProfLab_ObjectScript_PokeballTwo_1
 
 TestProfLab_ObjectScript_PokeballTwo_7:
-# 96 "data/maps/TestProfLab/scripts.pory"
-	bufferspeciesname STR_VAR_1, SPECIES_BULBASAUR
-# 97 "data/maps/TestProfLab/scripts.pory"
-	setvar VAR_STARTER_CHOICE, SPECIES_BULBASAUR
 # 98 "data/maps/TestProfLab/scripts.pory"
+	bufferspeciesname STR_VAR_1, SPECIES_SQUIRTLE
+# 99 "data/maps/TestProfLab/scripts.pory"
+	setvar VAR_STARTER_CHOICE, SPECIES_SQUIRTLE
+# 100 "data/maps/TestProfLab/scripts.pory"
 	call TestProfLab_ActionScript_GiveStarter
 	goto TestProfLab_ObjectScript_PokeballTwo_1
 
 
 TestProfLab_ObjectScript_PokeballThree::
-# 110 "data/maps/TestProfLab/scripts.pory"
-	lock
-# 111 "data/maps/TestProfLab/scripts.pory"
-	setvar VAR_TEMP_0, 3
 # 112 "data/maps/TestProfLab/scripts.pory"
+	lock
+# 113 "data/maps/TestProfLab/scripts.pory"
+	setvar VAR_TEMP_0, 3
+# 114 "data/maps/TestProfLab/scripts.pory"
 	goto_if_unset FLAG_SYS_POKEMON_GET, TestProfLab_ObjectScript_PokeballThree_2
-# 130 "data/maps/TestProfLab/scripts.pory"
+# 132 "data/maps/TestProfLab/scripts.pory"
 	msgbox TestProfLab_ObjectScript_PokeballOne_Text_0
 TestProfLab_ObjectScript_PokeballThree_1:
-# 132 "data/maps/TestProfLab/scripts.pory"
+# 134 "data/maps/TestProfLab/scripts.pory"
 	waitmessage
-# 133 "data/maps/TestProfLab/scripts.pory"
+# 135 "data/maps/TestProfLab/scripts.pory"
 	release
 	end
 
 TestProfLab_ObjectScript_PokeballThree_2:
-# 113 "data/maps/TestProfLab/scripts.pory"
+# 115 "data/maps/TestProfLab/scripts.pory"
 	compare VAR_TESTPROFLAB_CONTROLSTATE, 0
 	goto_if_eq TestProfLab_ObjectScript_PokeballThree_5
-# 118 "data/maps/TestProfLab/scripts.pory"
+# 120 "data/maps/TestProfLab/scripts.pory"
 	compare VAR_TESTPROFLAB_CONTROLSTATE, 1
 	goto_if_eq TestProfLab_ObjectScript_PokeballThree_6
-# 123 "data/maps/TestProfLab/scripts.pory"
+# 125 "data/maps/TestProfLab/scripts.pory"
 	compare VAR_TESTPROFLAB_CONTROLSTATE, 2
 	goto_if_eq TestProfLab_ObjectScript_PokeballThree_7
 	goto TestProfLab_ObjectScript_PokeballThree_1
 
 TestProfLab_ObjectScript_PokeballThree_5:
-# 114 "data/maps/TestProfLab/scripts.pory"
-	bufferspeciesname STR_VAR_1, SPECIES_TORCHIC
-# 115 "data/maps/TestProfLab/scripts.pory"
-	setvar VAR_STARTER_CHOICE, SPECIES_TORCHIC
 # 116 "data/maps/TestProfLab/scripts.pory"
+	bufferspeciesname STR_VAR_1, SPECIES_TORCHIC
+# 117 "data/maps/TestProfLab/scripts.pory"
+	setvar VAR_STARTER_CHOICE, SPECIES_TORCHIC
+# 118 "data/maps/TestProfLab/scripts.pory"
 	call TestProfLab_ActionScript_GiveStarter
 	goto TestProfLab_ObjectScript_PokeballThree_1
 
 TestProfLab_ObjectScript_PokeballThree_6:
-# 119 "data/maps/TestProfLab/scripts.pory"
-	bufferspeciesname STR_VAR_1, SPECIES_CYNDAQUIL
-# 120 "data/maps/TestProfLab/scripts.pory"
-	setvar VAR_STARTER_CHOICE, SPECIES_CYNDAQUIL
 # 121 "data/maps/TestProfLab/scripts.pory"
+	bufferspeciesname STR_VAR_1, SPECIES_CYNDAQUIL
+# 122 "data/maps/TestProfLab/scripts.pory"
+	setvar VAR_STARTER_CHOICE, SPECIES_CYNDAQUIL
+# 123 "data/maps/TestProfLab/scripts.pory"
 	call TestProfLab_ActionScript_GiveStarter
 	goto TestProfLab_ObjectScript_PokeballThree_1
 
 TestProfLab_ObjectScript_PokeballThree_7:
-# 124 "data/maps/TestProfLab/scripts.pory"
-	bufferspeciesname STR_VAR_1, SPECIES_CHARMANDER
-# 125 "data/maps/TestProfLab/scripts.pory"
-	setvar VAR_STARTER_CHOICE, SPECIES_CHARMANDER
 # 126 "data/maps/TestProfLab/scripts.pory"
+	bufferspeciesname STR_VAR_1, SPECIES_CHARMANDER
+# 127 "data/maps/TestProfLab/scripts.pory"
+	setvar VAR_STARTER_CHOICE, SPECIES_CHARMANDER
+# 128 "data/maps/TestProfLab/scripts.pory"
 	call TestProfLab_ActionScript_GiveStarter
 	goto TestProfLab_ObjectScript_PokeballThree_1
 
 
-TestProfLab_ActionScript_GiveStarter::
-# 138 "data/maps/TestProfLab/scripts.pory"
-	showmonpic VAR_STARTER_CHOICE, 10, 3
-# 139 "data/maps/TestProfLab/scripts.pory"
-	msgbox TestProfLab_ActionScript_GiveStarter_Text_0, MSGBOX_YESNO
+TestProfLab_TrainerScript_MayBattle::
 # 140 "data/maps/TestProfLab/scripts.pory"
+	playbgm MUS_ENCOUNTER_MAY, TRUE
+# 141 "data/maps/TestProfLab/scripts.pory"
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_SOUTH
+# 142 "data/maps/TestProfLab/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark
+# 143 "data/maps/TestProfLab/scripts.pory"
+	waitmovement 0
+# 144 "data/maps/TestProfLab/scripts.pory"
+	applymovement 5, TestProfLab_MovementScript_RivalMoveUp
+# 145 "data/maps/TestProfLab/scripts.pory"
+	waitmovement 0
+# 146 "data/maps/TestProfLab/scripts.pory"
+	trainerbattle_single TRAINER_MAY_ROUTE_103_TREECKO, TestProfLab_TextScript_RivalIntro, Route103_Text_MayDefeated, TestProfLab_ActionScript_RivalAftermath, FALSE
+	end
+
+
+TestProfLab_TrainerScript_BrendanBattle::
+# 151 "data/maps/TestProfLab/scripts.pory"
+	playbgm MUS_ENCOUNTER_MAY, TRUE
+# 152 "data/maps/TestProfLab/scripts.pory"
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_SOUTH
+# 153 "data/maps/TestProfLab/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark
+# 154 "data/maps/TestProfLab/scripts.pory"
+	waitmovement 0
+# 155 "data/maps/TestProfLab/scripts.pory"
+	applymovement 5, TestProfLab_MovementScript_RivalMoveUp
+# 156 "data/maps/TestProfLab/scripts.pory"
+	waitmovement 0
+# 157 "data/maps/TestProfLab/scripts.pory"
+	trainerbattle_single TRAINER_BRENDAN_ROUTE_103_TREECKO, TestProfLab_TextScript_RivalIntro, Route103_Text_BrendanDefeated, TestProfLab_ActionScript_RivalAftermath, FALSE
+	end
+
+
+TestProfLab_ActionScript_GiveStarter::
+# 162 "data/maps/TestProfLab/scripts.pory"
+	showmonpic VAR_STARTER_CHOICE, 10, 3
+# 163 "data/maps/TestProfLab/scripts.pory"
+	msgbox TestProfLab_ActionScript_GiveStarter_Text_0, MSGBOX_YESNO
+# 164 "data/maps/TestProfLab/scripts.pory"
 	compare VAR_RESULT, YES
 	goto_if_eq TestProfLab_ActionScript_GiveStarter_1
-# 166 "data/maps/TestProfLab/scripts.pory"
+# 190 "data/maps/TestProfLab/scripts.pory"
 	hidemonpic
-# 167 "data/maps/TestProfLab/scripts.pory"
+# 191 "data/maps/TestProfLab/scripts.pory"
 	msgbox TestProfLab_TextScript_NotChosen
 	return
 
 TestProfLab_ActionScript_GiveStarter_1:
-# 141 "data/maps/TestProfLab/scripts.pory"
+# 165 "data/maps/TestProfLab/scripts.pory"
 	setflag FLAG_SYS_POKEMON_GET
-# 142 "data/maps/TestProfLab/scripts.pory"
+# 166 "data/maps/TestProfLab/scripts.pory"
 	setvar VAR_LITTLEROOT_STATE, 2
-# 143 "data/maps/TestProfLab/scripts.pory"
-	givemon VAR_STARTER_CHOICE, 5, ITEM_ORAN_BERRY
-# 144 "data/maps/TestProfLab/scripts.pory"
+# 167 "data/maps/TestProfLab/scripts.pory"
+	givemon VAR_STARTER_CHOICE, 10, ITEM_ORAN_BERRY
+# 168 "data/maps/TestProfLab/scripts.pory"
 	call TestProfLab_ActionScript_BallToRemove
-# 145 "data/maps/TestProfLab/scripts.pory"
+# 169 "data/maps/TestProfLab/scripts.pory"
 	compare VAR_RESULT, MON_GIVEN_TO_PARTY
 	goto_if_eq TestProfLab_ActionScript_GiveStarter_5
-# 151 "data/maps/TestProfLab/scripts.pory"
+# 175 "data/maps/TestProfLab/scripts.pory"
 	compare VAR_RESULT, MON_GIVEN_TO_PC
 	goto_if_eq TestProfLab_ActionScript_GiveStarter_6
-# 159 "data/maps/TestProfLab/scripts.pory"
+# 183 "data/maps/TestProfLab/scripts.pory"
 	hidemonpic
-# 160 "data/maps/TestProfLab/scripts.pory"
+# 184 "data/maps/TestProfLab/scripts.pory"
 	msgbox TestProfLab_ActionScript_GiveStarter_Text_3
 TestProfLab_ActionScript_GiveStarter_4:
-# 162 "data/maps/TestProfLab/scripts.pory"
+# 186 "data/maps/TestProfLab/scripts.pory"
 	closemessage
-# 163 "data/maps/TestProfLab/scripts.pory"
-	call TestProfLab_ActionScript_InitiatePokedexSequence
+# 187 "data/maps/TestProfLab/scripts.pory"
+	call TestProfLab_ActionScript_InitiateDexAndRivalSequence
 	return
 
 TestProfLab_ActionScript_GiveStarter_5:
-# 146 "data/maps/TestProfLab/scripts.pory"
+# 170 "data/maps/TestProfLab/scripts.pory"
 	playfanfare MUS_OBTAIN_ITEM
-# 147 "data/maps/TestProfLab/scripts.pory"
+# 171 "data/maps/TestProfLab/scripts.pory"
 	msgbox TestProfLab_ActionScript_GiveStarter_Text_1
-# 148 "data/maps/TestProfLab/scripts.pory"
+# 172 "data/maps/TestProfLab/scripts.pory"
 	call TestProfLab_ActionScript_SetBallFlag
-# 149 "data/maps/TestProfLab/scripts.pory"
+# 173 "data/maps/TestProfLab/scripts.pory"
 	call TestProfLab_ActionScript_NicknamePartyMon
 	goto TestProfLab_ActionScript_GiveStarter_4
 
 TestProfLab_ActionScript_GiveStarter_6:
-# 152 "data/maps/TestProfLab/scripts.pory"
+# 176 "data/maps/TestProfLab/scripts.pory"
 	playfanfare MUS_OBTAIN_ITEM
-# 153 "data/maps/TestProfLab/scripts.pory"
+# 177 "data/maps/TestProfLab/scripts.pory"
 	msgbox TestProfLab_ActionScript_GiveStarter_Text_1
-# 154 "data/maps/TestProfLab/scripts.pory"
+# 178 "data/maps/TestProfLab/scripts.pory"
 	call TestProfLab_ActionScript_SetBallFlag
-# 155 "data/maps/TestProfLab/scripts.pory"
+# 179 "data/maps/TestProfLab/scripts.pory"
 	call TestProfLab_ActionScript_NicknameBoxMon
-# 156 "data/maps/TestProfLab/scripts.pory"
+# 180 "data/maps/TestProfLab/scripts.pory"
 	msgbox TestProfLab_ActionScript_GiveStarter_Text_2
 	goto TestProfLab_ActionScript_GiveStarter_4
 
 
 TestProfLab_ActionScript_BallToRemove::
-# 172 "data/maps/TestProfLab/scripts.pory"
+# 196 "data/maps/TestProfLab/scripts.pory"
 	compare VAR_TEMP_0, 1
 	goto_if_eq TestProfLab_ActionScript_BallToRemove_2
-# 176 "data/maps/TestProfLab/scripts.pory"
+# 200 "data/maps/TestProfLab/scripts.pory"
 	compare VAR_TEMP_0, 2
 	goto_if_eq TestProfLab_ActionScript_BallToRemove_5
-# 180 "data/maps/TestProfLab/scripts.pory"
+# 204 "data/maps/TestProfLab/scripts.pory"
 	compare VAR_TEMP_0, 3
 	goto_if_eq TestProfLab_ActionScript_BallToRemove_7
 	return
 
 TestProfLab_ActionScript_BallToRemove_2:
-# 173 "data/maps/TestProfLab/scripts.pory"
+# 197 "data/maps/TestProfLab/scripts.pory"
 	removeobject 2
 	return
 
 TestProfLab_ActionScript_BallToRemove_5:
-# 177 "data/maps/TestProfLab/scripts.pory"
+# 201 "data/maps/TestProfLab/scripts.pory"
 	removeobject 3
 	return
 
 TestProfLab_ActionScript_BallToRemove_7:
-# 181 "data/maps/TestProfLab/scripts.pory"
+# 205 "data/maps/TestProfLab/scripts.pory"
 	removeobject 4
 	return
 
 
 TestProfLab_ActionScript_SetBallFlag::
-# 187 "data/maps/TestProfLab/scripts.pory"
+# 211 "data/maps/TestProfLab/scripts.pory"
 	compare VAR_TEMP_0, 1
 	goto_if_eq TestProfLab_ActionScript_SetBallFlag_2
-# 191 "data/maps/TestProfLab/scripts.pory"
+# 215 "data/maps/TestProfLab/scripts.pory"
 	compare VAR_TEMP_0, 2
 	goto_if_eq TestProfLab_ActionScript_SetBallFlag_5
-# 195 "data/maps/TestProfLab/scripts.pory"
+# 219 "data/maps/TestProfLab/scripts.pory"
 	compare VAR_TEMP_0, 3
 	goto_if_eq TestProfLab_ActionScript_SetBallFlag_7
 	return
 
 TestProfLab_ActionScript_SetBallFlag_2:
-# 188 "data/maps/TestProfLab/scripts.pory"
+# 212 "data/maps/TestProfLab/scripts.pory"
 	setflag FLAG_PROF_BALL_1
 	return
 
 TestProfLab_ActionScript_SetBallFlag_5:
-# 192 "data/maps/TestProfLab/scripts.pory"
+# 216 "data/maps/TestProfLab/scripts.pory"
 	setflag FLAG_PROF_BALL_2
 	return
 
 TestProfLab_ActionScript_SetBallFlag_7:
-# 196 "data/maps/TestProfLab/scripts.pory"
+# 220 "data/maps/TestProfLab/scripts.pory"
 	setflag FLAG_PROF_BALL_3
 	return
 
 
-TestProfLab_ActionScript_InitiatePokedexSequence::
-# 202 "data/maps/TestProfLab/scripts.pory"
+TestProfLab_ActionScript_InitiateDexAndRivalSequence::
+# 226 "data/maps/TestProfLab/scripts.pory"
 	lock
-# 203 "data/maps/TestProfLab/scripts.pory"
+# 227 "data/maps/TestProfLab/scripts.pory"
 	delay 20
-# 204 "data/maps/TestProfLab/scripts.pory"
+# 228 "data/maps/TestProfLab/scripts.pory"
 	applymovement OBJ_EVENT_ID_PLAYER, TestProfLab_MovementScript_TurnToProf
-# 205 "data/maps/TestProfLab/scripts.pory"
+# 229 "data/maps/TestProfLab/scripts.pory"
 	compare VAR_TEMP_0, 1
-	goto_if_eq TestProfLab_ActionScript_InitiatePokedexSequence_2
-TestProfLab_ActionScript_InitiatePokedexSequence_1:
-# 208 "data/maps/TestProfLab/scripts.pory"
+	goto_if_eq TestProfLab_ActionScript_InitiateDexAndRivalSequence_2
+TestProfLab_ActionScript_InitiateDexAndRivalSequence_1:
+# 233 "data/maps/TestProfLab/scripts.pory"
 	compare VAR_TEMP_0, 2
-	goto_if_eq TestProfLab_ActionScript_InitiatePokedexSequence_5
-TestProfLab_ActionScript_InitiatePokedexSequence_4:
-# 211 "data/maps/TestProfLab/scripts.pory"
+	goto_if_eq TestProfLab_ActionScript_InitiateDexAndRivalSequence_5
+TestProfLab_ActionScript_InitiateDexAndRivalSequence_4:
+# 237 "data/maps/TestProfLab/scripts.pory"
 	compare VAR_TEMP_0, 3
-	goto_if_eq TestProfLab_ActionScript_InitiatePokedexSequence_8
-TestProfLab_ActionScript_InitiatePokedexSequence_7:
-# 214 "data/maps/TestProfLab/scripts.pory"
+	goto_if_eq TestProfLab_ActionScript_InitiateDexAndRivalSequence_8
+TestProfLab_ActionScript_InitiateDexAndRivalSequence_7:
+# 241 "data/maps/TestProfLab/scripts.pory"
 	waitmovement 0
-# 215 "data/maps/TestProfLab/scripts.pory"
+# 242 "data/maps/TestProfLab/scripts.pory"
 	delay 20
-# 216 "data/maps/TestProfLab/scripts.pory"
+# 243 "data/maps/TestProfLab/scripts.pory"
 	call TestProfLab_ActionScript_GivePokedex
-# 217 "data/maps/TestProfLab/scripts.pory"
+# 244 "data/maps/TestProfLab/scripts.pory"
+	call TestProfLab_ActionScript_InitRivalSequence
+# 245 "data/maps/TestProfLab/scripts.pory"
 	release
 	return
 
-TestProfLab_ActionScript_InitiatePokedexSequence_2:
-# 206 "data/maps/TestProfLab/scripts.pory"
+TestProfLab_ActionScript_InitiateDexAndRivalSequence_2:
+# 230 "data/maps/TestProfLab/scripts.pory"
+	setobjectxy 5, 5, 11
+# 231 "data/maps/TestProfLab/scripts.pory"
 	applymovement 1, TestProfLab_MovementScript_MoveBallOne
-	goto TestProfLab_ActionScript_InitiatePokedexSequence_1
+	goto TestProfLab_ActionScript_InitiateDexAndRivalSequence_1
 
-TestProfLab_ActionScript_InitiatePokedexSequence_5:
-# 209 "data/maps/TestProfLab/scripts.pory"
+TestProfLab_ActionScript_InitiateDexAndRivalSequence_5:
+# 234 "data/maps/TestProfLab/scripts.pory"
+	setobjectxy 5, 6, 11
+# 235 "data/maps/TestProfLab/scripts.pory"
 	applymovement 1, TestProfLab_MovementScript_MoveBallTwo
-	goto TestProfLab_ActionScript_InitiatePokedexSequence_4
+	goto TestProfLab_ActionScript_InitiateDexAndRivalSequence_4
 
-TestProfLab_ActionScript_InitiatePokedexSequence_8:
-# 212 "data/maps/TestProfLab/scripts.pory"
+TestProfLab_ActionScript_InitiateDexAndRivalSequence_8:
+# 238 "data/maps/TestProfLab/scripts.pory"
+	setobjectxy 5, 7, 11
+# 239 "data/maps/TestProfLab/scripts.pory"
 	applymovement 1, TestProfLab_MovementScript_MoveBallThree
-	goto TestProfLab_ActionScript_InitiatePokedexSequence_7
+	goto TestProfLab_ActionScript_InitiateDexAndRivalSequence_7
 
 
 TestProfLab_ActionScript_GivePokedex::
-# 222 "data/maps/TestProfLab/scripts.pory"
+# 250 "data/maps/TestProfLab/scripts.pory"
 	lock
-# 223 "data/maps/TestProfLab/scripts.pory"
+# 251 "data/maps/TestProfLab/scripts.pory"
 	msgbox TestProfLab_TextScript_TakePokedex, MSGBOX_DEFAULT
-# 224 "data/maps/TestProfLab/scripts.pory"
+# 252 "data/maps/TestProfLab/scripts.pory"
 	playfanfare MUS_OBTAIN_ITEM
-# 225 "data/maps/TestProfLab/scripts.pory"
+# 253 "data/maps/TestProfLab/scripts.pory"
 	message TestProfLab_ActionScript_GivePokedex_Text_0
-# 226 "data/maps/TestProfLab/scripts.pory"
+# 254 "data/maps/TestProfLab/scripts.pory"
 	waitfanfare
-# 227 "data/maps/TestProfLab/scripts.pory"
+# 255 "data/maps/TestProfLab/scripts.pory"
 	closemessage
-# 228 "data/maps/TestProfLab/scripts.pory"
+# 256 "data/maps/TestProfLab/scripts.pory"
 	setflag FLAG_SYS_POKEDEX_GET
-# 229 "data/maps/TestProfLab/scripts.pory"
+# 257 "data/maps/TestProfLab/scripts.pory"
 	setflag FLAG_ADVENTURE_STARTED
-# 230 "data/maps/TestProfLab/scripts.pory"
+# 258 "data/maps/TestProfLab/scripts.pory"
 	special SetUnlockedPokedexFlags
-# 231 "data/maps/TestProfLab/scripts.pory"
+# 259 "data/maps/TestProfLab/scripts.pory"
 	setflag FLAG_RECEIVED_POKEDEX_FROM_BIRCH
-# 232 "data/maps/TestProfLab/scripts.pory"
+# 260 "data/maps/TestProfLab/scripts.pory"
 	setvar VAR_CABLE_CLUB_TUTORIAL_STATE, 1
-# 233 "data/maps/TestProfLab/scripts.pory"
+# 261 "data/maps/TestProfLab/scripts.pory"
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_ExplainPokedex, MSGBOX_DEFAULT
-# 234 "data/maps/TestProfLab/scripts.pory"
+# 262 "data/maps/TestProfLab/scripts.pory"
 	msgbox TestProfLab_ActionScript_GivePokedex_Text_1, MSGBOX_DEFAULT
-# 235 "data/maps/TestProfLab/scripts.pory"
+# 263 "data/maps/TestProfLab/scripts.pory"
 	giveitem ITEM_POKE_BALL, 5
-# 236 "data/maps/TestProfLab/scripts.pory"
+# 264 "data/maps/TestProfLab/scripts.pory"
 	msgbox TestProfLab_ActionScript_GivePokedex_Text_2, MSGBOX_DEFAULT
-# 237 "data/maps/TestProfLab/scripts.pory"
+# 265 "data/maps/TestProfLab/scripts.pory"
 	waitmessage
-# 238 "data/maps/TestProfLab/scripts.pory"
+# 266 "data/maps/TestProfLab/scripts.pory"
 	release
+	return
+
+
+TestProfLab_ActionScript_InitRivalSequence::
+# 271 "data/maps/TestProfLab/scripts.pory"
+	checkplayergender
+# 272 "data/maps/TestProfLab/scripts.pory"
+	goto_if_eq VAR_RESULT, MALE, TestProfLab_TrainerScript_MayBattle
+# 273 "data/maps/TestProfLab/scripts.pory"
+	goto_if_eq VAR_RESULT, FEMALE, TestProfLab_TrainerScript_BrendanBattle
+	return
+
+
+TestProfLab_ActionScript_RivalAftermath::
+# 277 "data/maps/TestProfLab/scripts.pory"
+	lockall
+# 278 "data/maps/TestProfLab/scripts.pory"
+	msgbox TestProfLab_ActionScript_RivalAftermath_Text_0
+# 279 "data/maps/TestProfLab/scripts.pory"
+	applymovement 5, TestProfLab_MovementScript_RivalLeave
+# 280 "data/maps/TestProfLab/scripts.pory"
+	waitmovement 0
+# 281 "data/maps/TestProfLab/scripts.pory"
+	setflag FLAG_TEST_BRENDAN
+# 282 "data/maps/TestProfLab/scripts.pory"
+	setvar VAR_LITTLEROOT_STATE, 3
+# 283 "data/maps/TestProfLab/scripts.pory"
+	removeobject 5
+# 284 "data/maps/TestProfLab/scripts.pory"
+	fadedefaultbgm
+# 285 "data/maps/TestProfLab/scripts.pory"
+	releaseall
 	return
 
 
 TestProfLab_ActionScript_UpgradeToNatDex::
-# 243 "data/maps/TestProfLab/scripts.pory"
+# 289 "data/maps/TestProfLab/scripts.pory"
 	lock
-# 244 "data/maps/TestProfLab/scripts.pory"
+# 290 "data/maps/TestProfLab/scripts.pory"
 	playfanfare MUS_OBTAIN_ITEM
-# 245 "data/maps/TestProfLab/scripts.pory"
+# 291 "data/maps/TestProfLab/scripts.pory"
 	message LittlerootTown_ProfessorBirchsLab_Text_PokedexUpgradedToNational
-# 246 "data/maps/TestProfLab/scripts.pory"
+# 292 "data/maps/TestProfLab/scripts.pory"
 	waitmessage
-# 247 "data/maps/TestProfLab/scripts.pory"
+# 293 "data/maps/TestProfLab/scripts.pory"
 	waitfanfare
-# 248 "data/maps/TestProfLab/scripts.pory"
+# 294 "data/maps/TestProfLab/scripts.pory"
 	setflag FLAG_SYS_NATIONAL_DEX
-# 249 "data/maps/TestProfLab/scripts.pory"
+# 295 "data/maps/TestProfLab/scripts.pory"
 	special EnableNationalPokedex
-# 250 "data/maps/TestProfLab/scripts.pory"
+# 296 "data/maps/TestProfLab/scripts.pory"
 	closemessage
-# 251 "data/maps/TestProfLab/scripts.pory"
+# 297 "data/maps/TestProfLab/scripts.pory"
 	release
 	return
 
 
 TestProfLab_ActionScript_StarterFade::
-# 256 "data/maps/TestProfLab/scripts.pory"
+# 302 "data/maps/TestProfLab/scripts.pory"
 	fadescreen FADE_TO_BLACK
-# 257 "data/maps/TestProfLab/scripts.pory"
+# 303 "data/maps/TestProfLab/scripts.pory"
 	delay 20
-# 258 "data/maps/TestProfLab/scripts.pory"
+# 304 "data/maps/TestProfLab/scripts.pory"
 	fadescreen FADE_FROM_BLACK
 	return
 
 
 TestProfLab_ActionScript_NicknamePartyMon::
-# 263 "data/maps/TestProfLab/scripts.pory"
+# 309 "data/maps/TestProfLab/scripts.pory"
 	msgbox TestProfLab_ActionScript_NicknamePartyMon_Text_0, MSGBOX_YESNO
-# 264 "data/maps/TestProfLab/scripts.pory"
+# 310 "data/maps/TestProfLab/scripts.pory"
 	hidemonpic
-# 265 "data/maps/TestProfLab/scripts.pory"
+# 311 "data/maps/TestProfLab/scripts.pory"
 	compare VAR_RESULT, YES
 	goto_if_eq TestProfLab_ActionScript_NicknamePartyMon_1
 	return
 
 TestProfLab_ActionScript_NicknamePartyMon_1:
-# 266 "data/maps/TestProfLab/scripts.pory"
+# 312 "data/maps/TestProfLab/scripts.pory"
 	call Common_EventScript_GetGiftMonPartySlot
-# 267 "data/maps/TestProfLab/scripts.pory"
+# 313 "data/maps/TestProfLab/scripts.pory"
 	call Common_EventScript_NameReceivedPartyMon
 	return
 
 
 TestProfLab_ActionScript_NicknameBoxMon::
-# 272 "data/maps/TestProfLab/scripts.pory"
+# 318 "data/maps/TestProfLab/scripts.pory"
 	msgbox TestProfLab_ActionScript_NicknamePartyMon_Text_0, MSGBOX_YESNO
-# 273 "data/maps/TestProfLab/scripts.pory"
+# 319 "data/maps/TestProfLab/scripts.pory"
 	hidemonpic
-# 274 "data/maps/TestProfLab/scripts.pory"
+# 320 "data/maps/TestProfLab/scripts.pory"
 	compare VAR_RESULT, YES
 	goto_if_eq TestProfLab_ActionScript_NicknameBoxMon_2
 TestProfLab_ActionScript_NicknameBoxMon_1:
-# 277 "data/maps/TestProfLab/scripts.pory"
+# 323 "data/maps/TestProfLab/scripts.pory"
 	call Common_EventScript_TransferredToPC
 	return
 
 TestProfLab_ActionScript_NicknameBoxMon_2:
-# 275 "data/maps/TestProfLab/scripts.pory"
+# 321 "data/maps/TestProfLab/scripts.pory"
 	call Common_EventScript_NameReceivedBoxMon
 	goto TestProfLab_ActionScript_NicknameBoxMon_1
 
 
 TestProfLab_TriggerScript_StartStarterSequence::
-# 281 "data/maps/TestProfLab/scripts.pory"
+# 327 "data/maps/TestProfLab/scripts.pory"
 	lock
-# 282 "data/maps/TestProfLab/scripts.pory"
+# 328 "data/maps/TestProfLab/scripts.pory"
 	applymovement OBJ_EVENT_ID_PLAYER, TestProfLab_MovementScript_MeetTestProf
-# 283 "data/maps/TestProfLab/scripts.pory"
+# 329 "data/maps/TestProfLab/scripts.pory"
 	waitmovement 0
-# 284 "data/maps/TestProfLab/scripts.pory"
+# 330 "data/maps/TestProfLab/scripts.pory"
 	msgbox TestProfLab_TextScript_BeginAdventureText
-# 285 "data/maps/TestProfLab/scripts.pory"
+# 331 "data/maps/TestProfLab/scripts.pory"
 	waitmessage
-# 286 "data/maps/TestProfLab/scripts.pory"
+# 332 "data/maps/TestProfLab/scripts.pory"
 	closemessage
-# 287 "data/maps/TestProfLab/scripts.pory"
+# 333 "data/maps/TestProfLab/scripts.pory"
 	applymovement 1, TestProfLab_MovementScript_ProfMoves
-# 288 "data/maps/TestProfLab/scripts.pory"
+# 334 "data/maps/TestProfLab/scripts.pory"
 	waitmovement 0
-# 289 "data/maps/TestProfLab/scripts.pory"
+# 335 "data/maps/TestProfLab/scripts.pory"
 	setvar VAR_LITTLEROOT_STATE, 1
-# 290 "data/maps/TestProfLab/scripts.pory"
+# 336 "data/maps/TestProfLab/scripts.pory"
 	release
 	return
 
 
 TestProfLab_TriggerScript_StartStarterSequence2::
-# 294 "data/maps/TestProfLab/scripts.pory"
+# 340 "data/maps/TestProfLab/scripts.pory"
 	lock
-# 295 "data/maps/TestProfLab/scripts.pory"
+# 341 "data/maps/TestProfLab/scripts.pory"
 	applymovement OBJ_EVENT_ID_PLAYER, TestProfLab_MovementScript_MeetTestProf2
-# 296 "data/maps/TestProfLab/scripts.pory"
+# 342 "data/maps/TestProfLab/scripts.pory"
 	waitmovement 0
-# 297 "data/maps/TestProfLab/scripts.pory"
+# 343 "data/maps/TestProfLab/scripts.pory"
 	goto TestProfLab_TriggerScript_StartStarterSequence
 	return
 
 
 TestProfLab_TriggerScript_StopLeaving::
-# 301 "data/maps/TestProfLab/scripts.pory"
+# 347 "data/maps/TestProfLab/scripts.pory"
 	lockall
-# 302 "data/maps/TestProfLab/scripts.pory"
+# 348 "data/maps/TestProfLab/scripts.pory"
 	msgbox TestProfLab_TriggerScript_StopLeaving_Text_0
-# 303 "data/maps/TestProfLab/scripts.pory"
+# 349 "data/maps/TestProfLab/scripts.pory"
 	applymovement OBJ_EVENT_ID_PLAYER, TestProfLab_MovementScript_DoNotLeave
-# 304 "data/maps/TestProfLab/scripts.pory"
+# 350 "data/maps/TestProfLab/scripts.pory"
 	waitmovement 0
-# 305 "data/maps/TestProfLab/scripts.pory"
+# 351 "data/maps/TestProfLab/scripts.pory"
 	releaseall
 	return
 
 
-# 308 "data/maps/TestProfLab/scripts.pory"
+# 354 "data/maps/TestProfLab/scripts.pory"
 TestProfLab_MovementScript_MeetTestProf:
-# 309 "data/maps/TestProfLab/scripts.pory"
+# 355 "data/maps/TestProfLab/scripts.pory"
 	walk_up
-# 309 "data/maps/TestProfLab/scripts.pory"
+# 355 "data/maps/TestProfLab/scripts.pory"
 	walk_up
-# 309 "data/maps/TestProfLab/scripts.pory"
+# 355 "data/maps/TestProfLab/scripts.pory"
 	walk_up
-# 309 "data/maps/TestProfLab/scripts.pory"
+# 355 "data/maps/TestProfLab/scripts.pory"
 	walk_up
 	step_end
 
-# 312 "data/maps/TestProfLab/scripts.pory"
+# 358 "data/maps/TestProfLab/scripts.pory"
 TestProfLab_MovementScript_MeetTestProf2:
-# 313 "data/maps/TestProfLab/scripts.pory"
+# 359 "data/maps/TestProfLab/scripts.pory"
 	walk_left
 	step_end
 
-# 316 "data/maps/TestProfLab/scripts.pory"
+# 362 "data/maps/TestProfLab/scripts.pory"
 TestProfLab_MovementScript_ProfMoves:
-# 317 "data/maps/TestProfLab/scripts.pory"
+# 363 "data/maps/TestProfLab/scripts.pory"
 	walk_up
-# 318 "data/maps/TestProfLab/scripts.pory"
+# 364 "data/maps/TestProfLab/scripts.pory"
 	walk_right
-# 318 "data/maps/TestProfLab/scripts.pory"
+# 364 "data/maps/TestProfLab/scripts.pory"
 	walk_right
-# 319 "data/maps/TestProfLab/scripts.pory"
+# 365 "data/maps/TestProfLab/scripts.pory"
 	walk_up
-# 320 "data/maps/TestProfLab/scripts.pory"
+# 366 "data/maps/TestProfLab/scripts.pory"
 	face_down
 	step_end
 
-# 323 "data/maps/TestProfLab/scripts.pory"
+# 369 "data/maps/TestProfLab/scripts.pory"
 TestProfLab_MovementScript_MoveBallOne:
-# 324 "data/maps/TestProfLab/scripts.pory"
+# 370 "data/maps/TestProfLab/scripts.pory"
 	walk_left
-# 324 "data/maps/TestProfLab/scripts.pory"
+# 370 "data/maps/TestProfLab/scripts.pory"
 	walk_left
 	step_end
 
-# 327 "data/maps/TestProfLab/scripts.pory"
+# 373 "data/maps/TestProfLab/scripts.pory"
 TestProfLab_MovementScript_MoveBallTwo:
-# 328 "data/maps/TestProfLab/scripts.pory"
+# 374 "data/maps/TestProfLab/scripts.pory"
 	walk_left
 	step_end
 
-# 331 "data/maps/TestProfLab/scripts.pory"
+# 377 "data/maps/TestProfLab/scripts.pory"
 TestProfLab_MovementScript_MoveBallThree:
-# 332 "data/maps/TestProfLab/scripts.pory"
+# 378 "data/maps/TestProfLab/scripts.pory"
 	face_left
 	step_end
 
-# 335 "data/maps/TestProfLab/scripts.pory"
+# 381 "data/maps/TestProfLab/scripts.pory"
+TestProfLab_MovementScript_RivalMoveUp:
+# 382 "data/maps/TestProfLab/scripts.pory"
+	walk_up
+# 382 "data/maps/TestProfLab/scripts.pory"
+	walk_up
+# 382 "data/maps/TestProfLab/scripts.pory"
+	walk_up
+# 382 "data/maps/TestProfLab/scripts.pory"
+	walk_up
+# 382 "data/maps/TestProfLab/scripts.pory"
+	walk_up
+# 382 "data/maps/TestProfLab/scripts.pory"
+	walk_up
+	step_end
+
+# 385 "data/maps/TestProfLab/scripts.pory"
+TestProfLab_MovementScript_RivalLeave:
+# 386 "data/maps/TestProfLab/scripts.pory"
+	walk_down
+# 386 "data/maps/TestProfLab/scripts.pory"
+	walk_down
+# 386 "data/maps/TestProfLab/scripts.pory"
+	walk_down
+# 386 "data/maps/TestProfLab/scripts.pory"
+	walk_down
+# 386 "data/maps/TestProfLab/scripts.pory"
+	walk_down
+# 386 "data/maps/TestProfLab/scripts.pory"
+	walk_down
+	step_end
+
+# 389 "data/maps/TestProfLab/scripts.pory"
 TestProfLab_MovementScript_TurnToProf:
-# 336 "data/maps/TestProfLab/scripts.pory"
+# 390 "data/maps/TestProfLab/scripts.pory"
 	face_right
 	step_end
 
-# 339 "data/maps/TestProfLab/scripts.pory"
+# 393 "data/maps/TestProfLab/scripts.pory"
 TestProfLab_MovementScript_DoNotLeave:
-# 340 "data/maps/TestProfLab/scripts.pory"
+# 394 "data/maps/TestProfLab/scripts.pory"
 	walk_up
 	step_end
 
 TestProfLab_PersonScript_TestProf_Text_0:
-# 14 "data/maps/TestProfLab/scripts.pory"
+# 16 "data/maps/TestProfLab/scripts.pory"
 	.string "Hello, would you like to see more?$"
 
 TestProfLab_PersonScript_TestProf_Text_1:
-# 29 "data/maps/TestProfLab/scripts.pory"
+# 31 "data/maps/TestProfLab/scripts.pory"
 	.string "Choose wisely...$"
 
 TestProfLab_PersonScript_TestProf_Text_2:
-# 37 "data/maps/TestProfLab/scripts.pory"
+# 39 "data/maps/TestProfLab/scripts.pory"
 	.string "Do you want to upgrade to the National\n"
 	.string "Dex?$"
 
 TestProfLab_PersonScript_TestProf_Text_3:
-# 42 "data/maps/TestProfLab/scripts.pory"
+# 44 "data/maps/TestProfLab/scripts.pory"
 	.string "Please take care of your Pokemon.$"
 
 TestProfLab_ObjectScript_PokeballOne_Text_0:
-# 74 "data/maps/TestProfLab/scripts.pory"
+# 76 "data/maps/TestProfLab/scripts.pory"
 	.string "Don't Take Another.$"
 
 TestProfLab_ActionScript_GiveStarter_Text_0:
-# 139 "data/maps/TestProfLab/scripts.pory"
+# 163 "data/maps/TestProfLab/scripts.pory"
 	.string "Do you want to choose {STR_VAR_1}?$"
 
 TestProfLab_ActionScript_GiveStarter_Text_1:
-# 147 "data/maps/TestProfLab/scripts.pory"
+# 171 "data/maps/TestProfLab/scripts.pory"
 	.string "Received {STR_VAR_1}!$"
 
 TestProfLab_ActionScript_GiveStarter_Text_2:
-# 156 "data/maps/TestProfLab/scripts.pory"
+# 180 "data/maps/TestProfLab/scripts.pory"
 	.string "Transferred {STR_VAR_1} to PC$"
 
 TestProfLab_ActionScript_GiveStarter_Text_3:
-# 160 "data/maps/TestProfLab/scripts.pory"
+# 184 "data/maps/TestProfLab/scripts.pory"
 	.string "No more room for Pokemon!$"
 
 TestProfLab_ActionScript_GivePokedex_Text_0:
-# 225 "data/maps/TestProfLab/scripts.pory"
+# 253 "data/maps/TestProfLab/scripts.pory"
 	.string "{PLAYER} received the Pokedex!$"
 
 TestProfLab_ActionScript_GivePokedex_Text_1:
-# 234 "data/maps/TestProfLab/scripts.pory"
+# 262 "data/maps/TestProfLab/scripts.pory"
 	.string "Also take these with you...$"
 
 TestProfLab_ActionScript_GivePokedex_Text_2:
-# 236 "data/maps/TestProfLab/scripts.pory"
+# 264 "data/maps/TestProfLab/scripts.pory"
 	.string "These allow you to catch your own\n"
 	.string "Pokemon in tall grass so you can collect\l"
 	.string "research for the Pokedex.$"
 
+TestProfLab_ActionScript_RivalAftermath_Text_0:
+# 278 "data/maps/TestProfLab/scripts.pory"
+	.string "Well, that wasn't fun. I'll beat you next\n"
+	.string "time!$"
+
 TestProfLab_ActionScript_NicknamePartyMon_Text_0:
-# 263 "data/maps/TestProfLab/scripts.pory"
+# 309 "data/maps/TestProfLab/scripts.pory"
 	.string "Give it a nickname?$"
 
 TestProfLab_TriggerScript_StopLeaving_Text_0:
-# 302 "data/maps/TestProfLab/scripts.pory"
+# 348 "data/maps/TestProfLab/scripts.pory"
 	.string "You need to choose a Pokemon!$"
 
 TestProfLab_TextScript_BeginAdventureText::
-# 343 "data/maps/TestProfLab/scripts.pory"
+# 397 "data/maps/TestProfLab/scripts.pory"
 	.string "{COLOR RED}{SHADOW LIGHT_RED}TestProf:{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY} Hello {PLAYER}, my name is\n"
 	.string "TestProf. This is my lab.\p"
 	.string "Today is the day that you will be\n"
@@ -724,11 +841,15 @@ TestProfLab_TextScript_BeginAdventureText::
 	.string "come and talk to me.$"
 
 TestProfLab_TextScript_TakePokedex::
-# 353 "data/maps/TestProfLab/scripts.pory"
+# 407 "data/maps/TestProfLab/scripts.pory"
 	.string "Here, {PLAYER}, I ordered this for my\n"
 	.string "research, but I think you should have\l"
 	.string "this Pokedex.$"
 
 TestProfLab_TextScript_NotChosen::
-# 359 "data/maps/TestProfLab/scripts.pory"
+# 413 "data/maps/TestProfLab/scripts.pory"
 	.string "You did not choose {STR_VAR_1}.$"
+
+TestProfLab_TextScript_RivalIntro::
+# 417 "data/maps/TestProfLab/scripts.pory"
+	.string "We'll see if you have what it takes!$"

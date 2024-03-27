@@ -107,7 +107,7 @@ LittlerootTown_OnTransition:
 # 54 "data/maps/LittlerootTown/scripts.pory"
 	call_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2, LittlerootTown_EventScript_LeftLabAfterDexUpgrade
 # 55 "data/maps/LittlerootTown/scripts.pory"
-	call_if_unset FLAG_BRENDAN_TRANSITION, LittlerootTown_ControlScript_BrendanState
+	//call_if_unset FLAG_BRENDAN_TRANSITION, LittlerootTown_ControlScript_BrendanState
 # 56 "data/maps/LittlerootTown/scripts.pory"
 	end
 # 57 "data/maps/LittlerootTown/scripts.pory"
@@ -2043,79 +2043,6 @@ LittlerootTown_Text_BirchSomethingToShowYouAtLab:
 # 1022 "data/maps/LittlerootTown/scripts.pory"
 	.string "Let's go to my LAB.$"
 
-LittlerootTown_ControlScript_BrendanState::
-# 1027 "data/maps/LittlerootTown/scripts.pory"
-	goto_if_unset FLAG_SYS_POKEMON_GET, LittlerootTown_ControlScript_BrendanState_1
-# 1032 "data/maps/LittlerootTown/scripts.pory"
-	compare VAR_LITTLEROOT_STATE, 2
-	goto_if_eq LittlerootTown_ControlScript_BrendanState_4
-	return
-
-LittlerootTown_ControlScript_BrendanState_1:
-# 1028 "data/maps/LittlerootTown/scripts.pory"
-	setflag FLAG_TEST_BRENDAN
-# 1029 "data/maps/LittlerootTown/scripts.pory"
-	setvar VAR_LITTLEROOT_STATE, 0
-	return
-
-LittlerootTown_ControlScript_BrendanState_4:
-# 1033 "data/maps/LittlerootTown/scripts.pory"
-	clearflag FLAG_TEST_BRENDAN
-	return
-
-
-LittlerootTown_TrainerScript_BrendanBattle::
-# 1039 "data/maps/LittlerootTown/scripts.pory"
-	trainerbattle_single TRAINER_BRENDAN_ROUTE_103_TORCHIC, LittlerootTown_TextScript_BrendanIntro, LittlerootTown_TextScript_BrendanOutro, LittlerootTown_ActionScript_BrendanAftermath
-# 1040 "data/maps/LittlerootTown/scripts.pory"
-	msgbox LittlerootTown_TextScript_BrendanPostBattle, MSGBOX_AUTOCLOSE
-# 1041 "data/maps/LittlerootTown/scripts.pory"
-	waitmessage
-	end
-
-
-LittlerootTown_ActionScript_BrendanAftermath::
-# 1046 "data/maps/LittlerootTown/scripts.pory"
-	lockall
-# 1047 "data/maps/LittlerootTown/scripts.pory"
-	applymovement 9, LittlerootTown_MovementScript_BrendanLeaving
-# 1048 "data/maps/LittlerootTown/scripts.pory"
-	special SpawnCameraObject
-# 1049 "data/maps/LittlerootTown/scripts.pory"
-	applymovement OBJ_EVENT_ID_CAMERA, LittlerootTown_MovementScript_BrendanLeaving
-# 1050 "data/maps/LittlerootTown/scripts.pory"
-	waitmovement 0
-# 1051 "data/maps/LittlerootTown/scripts.pory"
-	opendoor 14, 8
-# 1052 "data/maps/LittlerootTown/scripts.pory"
-	waitdooranim
-# 1053 "data/maps/LittlerootTown/scripts.pory"
-	applymovement 9, LittlerootTown_MovementScript_BrendanEnterDoor
-# 1054 "data/maps/LittlerootTown/scripts.pory"
-	waitmovement 0
-# 1055 "data/maps/LittlerootTown/scripts.pory"
-	removeobject 9
-# 1056 "data/maps/LittlerootTown/scripts.pory"
-	closedoor 14, 8
-# 1057 "data/maps/LittlerootTown/scripts.pory"
-	waitdooranim
-# 1058 "data/maps/LittlerootTown/scripts.pory"
-	applymovement OBJ_EVENT_ID_CAMERA, LittlerootTown_MovementScript_PostBrendanCamRevert
-# 1059 "data/maps/LittlerootTown/scripts.pory"
-	waitmovement 0
-# 1060 "data/maps/LittlerootTown/scripts.pory"
-	special RemoveCameraObject
-# 1061 "data/maps/LittlerootTown/scripts.pory"
-	setflag FLAG_TEST_BRENDAN
-# 1062 "data/maps/LittlerootTown/scripts.pory"
-	setvar VAR_LITTLEROOT_STATE, 3
-# 1063 "data/maps/LittlerootTown/scripts.pory"
-	setflag FLAG_BRENDAN_TRANSITION
-# 1064 "data/maps/LittlerootTown/scripts.pory"
-	releaseall
-	return
-
-
 LittlerootTown_EncounterScript_GroudonOW::
 # 1068 "data/maps/LittlerootTown/scripts.pory"
 	lockall
@@ -2193,7 +2120,7 @@ LittlerootTown_ActionScript_WonOrCaught::
 # 1103 "data/maps/LittlerootTown/scripts.pory"
 	fadescreen FADE_TO_BLACK
 # 1104 "data/maps/LittlerootTown/scripts.pory"
-	removeobject 10
+	removeobject 9
 # 1105 "data/maps/LittlerootTown/scripts.pory"
 	fadescreen FADE_FROM_BLACK
 # 1106 "data/maps/LittlerootTown/scripts.pory"
@@ -2211,7 +2138,7 @@ LittlerootTown_ActionScript_RanAway::
 # 1114 "data/maps/LittlerootTown/scripts.pory"
 	fadescreen FADE_TO_BLACK
 # 1115 "data/maps/LittlerootTown/scripts.pory"
-	removeobject 10
+	removeobject 9
 # 1116 "data/maps/LittlerootTown/scripts.pory"
 	fadescreen FADE_FROM_BLACK
 # 1117 "data/maps/LittlerootTown/scripts.pory"
@@ -2231,13 +2158,13 @@ LittlerootTown_TriggerScript_GroudonTrigger::
 # 1126 "data/maps/LittlerootTown/scripts.pory"
 	call LittlerootTown_ActionScript_GroudonShake
 # 1127 "data/maps/LittlerootTown/scripts.pory"
-	applymovement 10, LittlerootTown_MovementScript_GroudonMove
+	applymovement 9, LittlerootTown_MovementScript_GroudonMove
 # 1128 "data/maps/LittlerootTown/scripts.pory"
 	waitmovement 0
 # 1129 "data/maps/LittlerootTown/scripts.pory"
 	call LittlerootTown_ActionScript_GroudonShake
 # 1130 "data/maps/LittlerootTown/scripts.pory"
-	applymovement 10, LittlerootTown_MovementScript_GroudonMove
+	applymovement 9, LittlerootTown_MovementScript_GroudonMove
 # 1131 "data/maps/LittlerootTown/scripts.pory"
 	waitmovement 0
 # 1132 "data/maps/LittlerootTown/scripts.pory"
@@ -2331,72 +2258,6 @@ LittlerootTown_MovementScript_StepRight:
 	face_up
 	step_end
 
-# 1188 "data/maps/LittlerootTown/scripts.pory"
-LittlerootTown_MovementScript_BrendanLeaving:
-# 1189 "data/maps/LittlerootTown/scripts.pory"
-	face_down
-# 1190 "data/maps/LittlerootTown/scripts.pory"
-	walk_down
-# 1191 "data/maps/LittlerootTown/scripts.pory"
-	walk_left
-# 1191 "data/maps/LittlerootTown/scripts.pory"
-	walk_left
-# 1191 "data/maps/LittlerootTown/scripts.pory"
-	walk_left
-# 1191 "data/maps/LittlerootTown/scripts.pory"
-	walk_left
-# 1191 "data/maps/LittlerootTown/scripts.pory"
-	walk_left
-# 1191 "data/maps/LittlerootTown/scripts.pory"
-	walk_left
-# 1191 "data/maps/LittlerootTown/scripts.pory"
-	walk_left
-# 1191 "data/maps/LittlerootTown/scripts.pory"
-	walk_left
-# 1191 "data/maps/LittlerootTown/scripts.pory"
-	walk_left
-# 1191 "data/maps/LittlerootTown/scripts.pory"
-	walk_left
-# 1191 "data/maps/LittlerootTown/scripts.pory"
-	walk_left
-# 1192 "data/maps/LittlerootTown/scripts.pory"
-	walk_up
-# 1192 "data/maps/LittlerootTown/scripts.pory"
-	walk_up
-	step_end
-
-# 1195 "data/maps/LittlerootTown/scripts.pory"
-LittlerootTown_MovementScript_BrendanEnterDoor:
-# 1196 "data/maps/LittlerootTown/scripts.pory"
-	walk_up
-	step_end
-
-# 1199 "data/maps/LittlerootTown/scripts.pory"
-LittlerootTown_MovementScript_PostBrendanCamRevert:
-# 1200 "data/maps/LittlerootTown/scripts.pory"
-	walk_fast_right
-# 1200 "data/maps/LittlerootTown/scripts.pory"
-	walk_fast_right
-# 1200 "data/maps/LittlerootTown/scripts.pory"
-	walk_fast_right
-# 1200 "data/maps/LittlerootTown/scripts.pory"
-	walk_fast_right
-# 1200 "data/maps/LittlerootTown/scripts.pory"
-	walk_fast_right
-# 1200 "data/maps/LittlerootTown/scripts.pory"
-	walk_fast_right
-# 1200 "data/maps/LittlerootTown/scripts.pory"
-	walk_fast_right
-# 1200 "data/maps/LittlerootTown/scripts.pory"
-	walk_fast_right
-# 1200 "data/maps/LittlerootTown/scripts.pory"
-	walk_fast_right
-# 1200 "data/maps/LittlerootTown/scripts.pory"
-	walk_fast_right
-# 1201 "data/maps/LittlerootTown/scripts.pory"
-	walk_diag_southeast
-	step_end
-
 # 1204 "data/maps/LittlerootTown/scripts.pory"
 LittlerootTown_MovementScript_StopPlayer:
 # 1205 "data/maps/LittlerootTown/scripts.pory"
@@ -2426,15 +2287,3 @@ LittlerootTown_SignScript_Test_Text_0:
 LittlerootTown_SignScript_TestProfLab_Text_0:
 # 1165 "data/maps/LittlerootTown/scripts.pory"
 	.string "Test Professor's Lab$"
-
-LittlerootTown_TextScript_BrendanIntro::
-# 1208 "data/maps/LittlerootTown/scripts.pory"
-	.string "You'll never win!$"
-
-LittlerootTown_TextScript_BrendanOutro::
-# 1212 "data/maps/LittlerootTown/scripts.pory"
-	.string "Damn, bro...$"
-
-LittlerootTown_TextScript_BrendanPostBattle::
-# 1216 "data/maps/LittlerootTown/scripts.pory"
-	.string "I'll win next time!$"

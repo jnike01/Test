@@ -2172,3 +2172,12 @@
 	.2byte \status1
 	.2byte \slot
 	.endm
+
+	@ Changes the caught ball of a selected Pokemon
+	.macro setmonball ballId:req
+	special ChoosePartyMon
+	waitstate
+	setvar VAR_TEMP_1, \ballId
+	special SetMonBall
+	.endm
+

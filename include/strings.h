@@ -3065,4 +3065,9 @@ extern const u8 gText_HoennStarter[];
 extern const u8 gText_Fertilize[];
 extern const u8 gText_PlantBerry[];
 
+extern const u8 gText_DuskBallChange[];
+extern const u8 gText_QuickBallChange[];
+extern const u8 gText_UltraBallChange[];
+extern const u8 gText_DiveBallChange[];
+
 #endif // GUARD_STRINGS_H

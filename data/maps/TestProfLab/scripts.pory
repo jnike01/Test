@@ -50,7 +50,36 @@ script TestProfLab_PersonScript_TestProf{
         release
     }
     end    
-}   
+}
+
+script TestProfLab_PersonScript_BallChangeAide{
+    lock
+    faceplayer
+    msgbox(format("Do you want me to change the Ball Type your Pokemon is in?"), MSGBOX_YESNO)
+    if(var(VAR_RESULT) == YES){
+        message(format("Ok, great! What would you like it changed to?"))
+        multichoice(25, 4, MULTI_BALL_CHANGE, 0)
+        closemessage
+        if(var(VAR_RESULT) == 0){
+            setmonball(ITEM_DUSK_BALL)
+        }
+        elif(var(VAR_RESULT) == 1){
+            setmonball(ITEM_QUICK_BALL)
+        }
+        elif(var(VAR_RESULT) == 2){
+            setmonball(ITEM_ULTRA_BALL)
+        }
+        elif(var(VAR_RESULT) == 3){
+            setmonball(ITEM_DIVE_BALL)
+        }
+        msgbox("All set! Come again...", MSGBOX_DEFAULT)
+    }
+    elif(var(VAR_RESULT) == NO){
+        msgbox("If you change your mind, I'm here.", MSGBOX_DEFAULT)
+    }
+    release
+    end
+}
 
 script TestProfLab_ObjectScript_PokeballOne{
     lock

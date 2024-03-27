@@ -1859,3 +1859,7 @@ const u8 gText_JohtoStarter[] = _("Johto");
 const u8 gText_HoennStarter[] = _("Hoenn");
 const u8 gText_Fertilize[] = _("FERTILIZE");
 const u8 gText_PlantBerry[] = _("PLANT BERRY");
+const u8 gText_DuskBallChange[] = _("Dusk Ball");
+const u8 gText_QuickBallChange[] = _("Quick Ball");
+const u8 gText_UltraBallChange[] = _("Ultra Ball");
+const u8 gText_DiveBallChange[] = _("Dive Ball");

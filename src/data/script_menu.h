@@ -777,6 +777,13 @@ static const struct MenuAction MultichoiceList_Starters[] = {
     {gText_HoennStarter},
 };
 
+static const struct MenuAction MultichoiceList_BallChangeOptions[] = {
+    {gText_DuskBallChange},
+    {gText_QuickBallChange},
+    {gText_UltraBallChange},
+    {gText_DiveBallChange},
+};
+
 static const struct MenuAction MultichoiceList_BerryPlot[] =
 {
     {gText_Fertilize},
@@ -913,6 +920,7 @@ static const struct MultichoiceListStruct sMultichoiceLists[] =
     [MULTI_TAG_MATCH_TYPE]             = MULTICHOICE(MultichoiceList_TagMatchType),
     [MULTI_STARTER_CHOICE]             = MULTICHOICE(MultichoiceList_Starters),
     [MULTI_BERRY_PLOT]                 = MULTICHOICE(MultichoiceList_BerryPlot),
+    [MULTI_BALL_CHANGE]                = MULTICHOICE(MultichoiceList_BallChangeOptions),
 };
 
 const u8 *const gStdStrings[] =

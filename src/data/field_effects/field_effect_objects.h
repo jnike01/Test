@@ -1,5 +1,6 @@
 const struct SpritePalette gSpritePalette_GeneralFieldEffect0 = {gFieldEffectObjectPalette0, FLDEFF_PAL_TAG_GENERAL_0};
 const struct SpritePalette gSpritePalette_GeneralFieldEffect1 = {gFieldEffectObjectPalette1, FLDEFF_PAL_TAG_GENERAL_1};
+//const struct SpritePalette gSpritePaletee_BombFieldEffect     = {gFieldEffectObjectPaletteBomb, FLDEFF_PAL_TAG_BOMB};
 
 static const union AnimCmd sAnim_Shadow[] =
 {
@@ -217,6 +218,73 @@ const struct SpriteTemplate gFieldEffectObjectTemplate_SurfBlob = {
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = UpdateSurfBlobFieldEffect,
 };
+
+/*static const struct SpriteFrameImage sPicTable_Bomb[] = {
+    overworld_frame(gFieldEffectObjectPic_Bomb, 4, 4, 0),
+    overworld_frame(gFieldEffectObjectPic_Bomb, 4, 4, 1),
+    overworld_frame(gFieldEffectObjectPic_Bomb, 4, 4, 2),
+    overworld_frame(gFieldEffectObjectPic_Bomb, 4, 4, 3),
+    overworld_frame(gFieldEffectObjectPic_Bomb, 4, 4, 4),
+    overworld_frame(gFieldEffectObjectPic_Bomb, 4, 4, 5),
+};
+
+static const union AnimCmd sBombAnim_South[] = {
+    ANIMCMD_FRAME(0, 24),
+    ANIMCMD_FRAME(1, 20),
+    ANIMCMD_FRAME(2, 4),
+    ANIMCMD_FRAME(3, 4),
+    ANIMCMD_FRAME(4, 4),
+    ANIMCMD_FRAME(5, 4),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sBombAnim_North[] = {
+    ANIMCMD_FRAME(0, 24),
+    ANIMCMD_FRAME(1, 20),
+    ANIMCMD_FRAME(2, 4),
+    ANIMCMD_FRAME(3, 4),
+    ANIMCMD_FRAME(4, 4),
+    ANIMCMD_FRAME(5, 4),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sBombAnim_West[] = {
+    ANIMCMD_FRAME(0, 24),
+    ANIMCMD_FRAME(1, 20),
+    ANIMCMD_FRAME(2, 4),
+    ANIMCMD_FRAME(3, 4),
+    ANIMCMD_FRAME(4, 4),
+    ANIMCMD_FRAME(5, 4),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sBombAnim_East[] = {
+    ANIMCMD_FRAME(0, 24),
+    ANIMCMD_FRAME(1, 20),
+    ANIMCMD_FRAME(2, 4),
+    ANIMCMD_FRAME(3, 4),
+    ANIMCMD_FRAME(4, 4),
+    ANIMCMD_FRAME(5, 4),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd *const sAnimTable_Bomb[] = {
+    sBombAnim_South,
+    sBombAnim_North,
+    sBombAnim_West,
+    sBombAnim_East,
+};
+
+const struct SpriteTemplate gFieldEffectObjectTemplate_Bomb[] = {
+    .tileTag = TAG_NONE,
+    .paletteTag = FLDEFF_PAL_TAG_BOMB,
+    .oam = &gObjectEventBaseOam_32x32,
+    .anims = sAnimTable_Bomb,
+    .images = sPicTable_Bomb,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
+};
+*/
 
 static const struct SpriteFrameImage sPicTable_Arrow[] = {
     overworld_frame(gFieldEffectObjectPic_Arrow, 2, 2, 0),

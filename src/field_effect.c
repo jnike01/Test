@@ -3981,3 +3981,434 @@ static void UseVsSeeker_CleanUpFieldEffect(struct Task *task)
     FieldEffectActiveListRemove(FLDEFF_USE_VS_SEEKER);
     DestroyTask(FindTaskIdByFunc(Task_FldEffUseVsSeeker));
 }
+
+/*
+//////////////////////////////////
+///    BOMBS TASK FUNCTIONS    ///
+//////////////////////////////////
+
+// Bomb Task Data Macros
+#define bState data[0]
+#define bBombSpriteID data[1]
+#define bDir data[2]
+
+#define bLeftCheck data[3]
+#define bRightCheck data[4]
+#define bFrontCheck data[5]
+
+#define bLeftBomb data[6]
+#define bRightBomb data[7]
+#define bFrontBomb data[8]
+
+#define bRockSmashStart data[9]
+#define bRockSmashEnd data[10]
+
+#define bBombAnimation data[11]
+#define bBombAnimStarted data[12]
+
+// Bomb Check Constants
+#define NOTHING 0
+#define BOMBABLE_TILE 1
+#define TILE_NORTH 2
+#define TILE_SOUTH 3
+#define TILE_EAST 4
+#define TILE_WEST 5
+#define ROCKSMASH 6
+
+#define BOMB_ANIM_LENGTH
+#define BOMB_ANIM_EXPLOSION_START
+
+#define OBJ_EVENT_GFX_BREAKABLE_ROCK
+
+static void Task_Bomb(u8 taskId);
+static u8 Bomb_Init(struct Task *task);
+static u8 Bomb_AnimStart(struct Task *task);
+static u8 Bomb_North(struct Task *task);
+static u8 Bomb_South(struct Task *task);
+static u8 Bomb_East(struct Task *task);
+static u8 Bomb_West(struct Task *task);
+static u8 Bomb_RockSmash(struct Task *task);
+static u8 Bomb_End(struct Task *task);
+
+static bool8(*const sBombStateFuncs[])(struct Task *) = {
+    Bomb_Init,
+    Bomb_AnimStart,
+    Bomb_North,
+    Bomb_South,
+    Bomb_East,
+    Bomb_West,
+    Bomb_RockSmash,
+    Bomb_End,
+};
+
+void FldEff_Bomb(void){
+    u8 taskId = CreateTask(Task_Bomb, 0xFF);
+    gTasks[taskId].bLeftCheck = gFieldEffectArguments[0];
+    gTasks[taskId].bRightCheck = gFieldEffectArguments[1];
+    gTasks[taskId].bFrontCheck = gFieldEffectArguments[2];
+    gTasks[taskId].bRockSmashStart = gFieldEffectArguments[3];
+    gTasks[taskId].bBombAnimation = 0;
+    gTasks[taskId].bBombAnimStarted = 0;
+    gTasks[taskId].bDir = GetPlayerFacingDirection();
+    Task_Bomb(taskId);
+}
+
+static void Task_Bomb(u8 taskId){
+    while(sBombStateFuncs[gTasks[taskId].bState](&gTasks[taskId]));
+}
+
+static bool8 Bomb_Init(struct Task *task){
+    struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    s16 x = playerObjEvent->currentCoords.x;
+    s16 y = playerObjEvent->currentCoords.y;
+    s16 x2;
+    s16 y2;
+
+    u8 spriteId;
+    struct Sprite *sprite;
+    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_BOMB], 0, 0, 0xFF);
+    task->bBombSpriteID = spriteId;
+    if(spriteId != MAX_SPRITES){
+        sprite = &gSprites[spriteId];
+        sprite->oam.priority = 1;
+        if(PlayerGetElevation() == 3){
+            sprite->oam.priority = 2;
+        }
+        sprite->coordOffsetEnabled = TRUE;
+    }
+    sprite = &gSprites[spriteId];
+    SetSpritePosToMapCoords(playerObjEvent->currentCoords.x, playerObjEvent->currentCoords.y, &x2, &y2);
+    sprite->x = x2 + 8;
+    sprite->y = y2 + 8;
+    sprite->data[0] = playerObjEvent->currentCoords.x;
+    sprite->data[1] = playerObjEvent->currentCoords.y;
+    sprite->invisible = TRUE;
+
+    task->bFrontBomb = 0;
+    task->bRightBomb = 0;
+    task->bLeftBomb = 0;
+
+    task->bState++;
+    return FALSE;
+}
+
+static bool8 Bomb_AnimStart(struct Task *task){
+    if(task->bBomAnimStarted == 0){
+        struct ObjectEvent *playerObjEvent = & gObjectEvents[gPlayerAvatar.objectEventId];
+        s16 x = playerObjEvent->currentCoords.x;
+        s16 y = playerObjEvent->currentCoords.y;
+        struct Sprite *sprite;
+
+        if(task->bDir == DIR_NORTH){
+            sprite = &gSprites[task->bBombSpriteID];
+            sprite->x -= 0;
+            sprite->y -= 16;
+            sprite->invisible = FALSE;
+        }
+        if(task->bDir == DIR_SOUTH){
+            sprite = &gSprites[task->bBombSpriteID];
+            sprite->x -= 0;
+            sprite->y += 16;
+            sprite->invisible = FALSE;
+        }
+        if(task->bDir == DIR_WEST){
+            sprite = &gSprites[task->bBombSpriteID];
+            sprite->x -= 16;
+            sprite->y -= 0;
+            sprite->invisible = FALSE;
+        }
+        if(tasj->bDir == DIR_EAST){
+            sprite = &gSprites[task->bBombSpriteID];
+            sprite->x += 16;
+            sprite->y -= 0;
+            sprite->invisible = FALSE;
+        }
+
+        StartSpriteAnim(&gSprites[task->bBombSpriteID], GetFaceDirectionAnimNum(task->bDir));
+        task->bBombAnimStarted = 1;
+    }
+
+    if(task->bBombAnimation >= BOMB_ANIM_EXPLOSION_START){
+        if(task->bDir == DIR_EAST){task->bState = 4;}
+        if(task->bDir == DIR_WEST){task->bState = 5;}
+        if(task->bDir == DIR_NORTH){task->bState = 2;}
+        if(task->bDir == DIR_SOUTH){task->bState = 3;}
+    }
+
+    task->bBombAnimation++;
+    return FALSE;
+}
+
+static bool8 Bomb_North(struct Task *task){
+    struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    s16 x = playerObjEvent->currentCoords.x;
+    s16 y = playerObjEvent->currentCoords.y;
+
+    // add new north doors for Bomb_North, south doors for Bomb_South, west doors for Bomb_West and east doors for Bomb_East
+    if(task->bFrontCheck == BOMBABLE_TILE){
+        if(MapGridGetMetatileIdAt(x, y - 2) == METATILE_Cave_BOTTOM_CAVE_NORTH){
+            MapGridSetMetatileIdAt(x, y - 2, METATILE_Cave_SealedChamberEntrance_BottomMid);
+            MapGridSetMetatileIdAt(x, ((y - 3)), METATILE_Cave_SealedChamberEntrance_TopMid);
+            DrawWholeMapView();
+        }
+    }
+    // add west doors for Bomb_North,  east doors for Bomb_South, north doors for Bomb_West and south doors for Bomb_East
+    if(task->bLeftCheck == BOMBABLE_TILE){
+        if(MapGridGetMetatileIdAt(x - 1, y - 1) == METATILE_Cave_BOTTOM_CAVE_NORTH){
+            //MapGridSetMetatileIdAt(x, y - 2, METATILE_Cave_SealedChamberEntrance_BottomMid);
+            //MapGridSetMetatileIdAt(x, ((y - 3)), METATILE_Cave_SealedChamberEntrance_TopMid);
+            DrawWholeMapView();
+        }
+    }
+    // add east doors for Bomb_North,  west doors for Bomb_South, south doors for Bomb_West and north doors for Bomb_East
+    if(task->bRightCheck == BOMBABLE_TILE){
+        if(MapGridGetMetatileIdAt(x + 1, y - 1) == METATILE_Cave_BOTTOM_CAVE_NORTH){
+            //MapGridSetMetatileIdAt(x, y - 2, METATILE_Cave_SealedChamberEntrance_BottomMid);
+            //MapGridSetMetatileIdAt(x, ((y - 3)), METATILE_Cave_SealedChamberEntrance_TopMid);
+            DrawWholeMapView();
+        }
+    }
+    PlaySE(SE_BANG)
+    task->bState = BOMB_ROCKSMASH;
+    task->bBombAnimation++;
+    return FALSE;
+}
+
+static bool8 Bomb_South(struct Task *task){
+    struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    s16 x = playerObjEvent->currentCoords.x;
+    s16 y = playerObjEvent->currentCoords.y;
+
+    // add new north doors for Bomb_North, south doors for Bomb_South, west doors for Bomb_West and east doors for Bomb_East
+    if(task->bFrontCheck == BOMBABLE_TILE){
+        if(MapGridGetMetatileIdAt(x, y + 2) == METATILE_Cave_BOTTOM_CAVE_NORTH){
+            //MapGridSetMetatileIdAt(x, y + 2, METATILE_Cave_SealedChamberEntrance_BottomMid);
+            //MapGridSetMetatileIdAt(x, ((y - 3)), METATILE_Cave_SealedChamberEntrance_TopMid);
+            DrawWholeMapView();
+        }
+    }
+    // add west doors for Bomb_North,  east doors for Bomb_South, north doors for Bomb_West and south doors for Bomb_East
+    if(task->bLeftCheck == BOMBABLE_TILE){
+        if(MapGridGetMetatileIdAt(x + 1, y + 1) == METATILE_Cave_BOTTOM_CAVE_NORTH){
+            //MapGridSetMetatileIdAt(x, y - 2, METATILE_Cave_SealedChamberEntrance_BottomMid);
+            //MapGridSetMetatileIdAt(x, ((y - 3)), METATILE_Cave_SealedChamberEntrance_TopMid);
+            DrawWholeMapView();
+        }
+    }
+    // add east doors for Bomb_North,  west doors for Bomb_South, south doors for Bomb_West and north doors for Bomb_East
+    if(task->bRightCheck == BOMBABLE_TILE){
+        if(MapGridGetMetatileIdAt(x - 1, y + 1) == METATILE_Cave_BOTTOM_CAVE_NORTH){
+            //MapGridSetMetatileIdAt(x, y - 2, METATILE_Cave_SealedChamberEntrance_BottomMid);
+            //MapGridSetMetatileIdAt(x, ((y - 3)), METATILE_Cave_SealedChamberEntrance_TopMid);
+            DrawWholeMapView();
+        }
+    }
+    PlaySE(SE_BANG)
+    task->bState = BOMB_ROCKSMASH;
+    task->bBombAnimation++;
+    return FALSE;
+}
+
+static bool8 Bomb_East(struct Task *task){
+    struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    s16 x = playerObjEvent->currentCoords.x;
+    s16 y = playerObjEvent->currentCoords.y;
+
+    // add new north doors for Bomb_North, south doors for Bomb_South, west doors for Bomb_West and east doors for Bomb_East
+    if(task->bFrontCheck == BOMBABLE_TILE){
+        if(MapGridGetMetatileIdAt(x + 2, y) == METATILE_Cave_BOTTOM_CAVE_NORTH){
+            MapGridSetMetatileIdAt(x, y - 2, METATILE_Cave_SealedChamberEntrance_BottomMid);
+            MapGridSetMetatileIdAt(x, ((y - 3)), METATILE_Cave_SealedChamberEntrance_TopMid);
+            DrawWholeMapView();
+        }
+    }
+    // add west doors for Bomb_North,  east doors for Bomb_South, north doors for Bomb_West and south doors for Bomb_East
+    if(task->bLeftCheck == BOMBABLE_TILE){
+        if(MapGridGetMetatileIdAt(x + 1, y - 1) == METATILE_Cave_BOTTOM_CAVE_NORTH){
+            MapGridSetMetatileIdAt(x + 1, y - 1, METATILE_Cave_SealedChamberEntrance_BottomMid);
+            MapGridSetMetatileIdAt(x + 1, ((y - 2)), METATILE_Cave_SealedChamberEntrance_TopMid);
+            DrawWholeMapView();
+        }
+    }
+    // add east doors for Bomb_North,  west doors for Bomb_South, south doors for Bomb_West and north doors for Bomb_East
+    if(task->bRightCheck == BOMBABLE_TILE){
+        if(MapGridGetMetatileIdAt(x + 1, y + 1) == METATILE_Cave_BOTTOM_CAVE_NORTH){
+            //MapGridSetMetatileIdAt(x, y - 2, METATILE_Cave_SealedChamberEntrance_BottomMid);
+            //MapGridSetMetatileIdAt(x, ((y - 3)), METATILE_Cave_SealedChamberEntrance_TopMid);
+            DrawWholeMapView();
+        }
+    }
+    PlaySE(SE_BANG)
+    task->bState = BOMB_ROCKSMASH;
+    task->bBombAnimation++;
+    return FALSE;
+}
+
+static bool8 Bomb_West(struct Task *task){
+    struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    s16 x = playerObjEvent->currentCoords.x;
+    s16 y = playerObjEvent->currentCoords.y;
+
+    // add new north doors for Bomb_North, south doors for Bomb_South, west doors for Bomb_West and east doors for Bomb_East
+    if(task->bFrontCheck == BOMBABLE_TILE){
+        if(MapGridGetMetatileIdAt(x - 2, y) == METATILE_Cave_BOTTOM_CAVE_NORTH){
+            //MapGridSetMetatileIdAt(x, y - 2, METATILE_Cave_SealedChamberEntrance_BottomMid);
+            //MapGridSetMetatileIdAt(x, ((y - 3)), METATILE_Cave_SealedChamberEntrance_TopMid);
+            DrawWholeMapView();
+        }
+    }
+    // add west doors for Bomb_North,  east doors for Bomb_South, north doors for Bomb_West and south doors for Bomb_East
+    if(task->bLeftCheck == BOMBABLE_TILE){
+        if(MapGridGetMetatileIdAt(x - 1, y + 1) == METATILE_Cave_BOTTOM_CAVE_NORTH){
+            //MapGridSetMetatileIdAt(x + 1, y - 1, METATILE_Cave_SealedChamberEntrance_BottomMid);
+            //MapGridSetMetatileIdAt(x + 1, ((y - 2)), METATILE_Cave_SealedChamberEntrance_TopMid);
+            DrawWholeMapView();
+        }
+    }
+    // add east doors for Bomb_North,  west doors for Bomb_South, south doors for Bomb_West and north doors for Bomb_East
+    if(task->bRightCheck == BOMBABLE_TILE){
+        if(MapGridGetMetatileIdAt(x - 1, y - 1) == METATILE_Cave_BOTTOM_CAVE_NORTH){
+            MapGridSetMetatileIdAt(x, y - 2, METATILE_Cave_SealedChamberEntrance_BottomMid);
+            MapGridSetMetatileIdAt(x, ((y - 3)), METATILE_Cave_SealedChamberEntrance_TopMid);
+            DrawWholeMapView();
+        }
+    }
+    PlaySE(SE_BANG)
+    task->bState = BOMB_ROCKSMASH;
+    task->bBombAnimation++;
+    return FALSE;
+}
+
+static bool8 Bomb_RockSmash(struct Task *task){
+    struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    struct ObjectEvent *objectEvent_Front;
+    struct ObjectEvent *objectEvent_Left;
+    struct ObjectEvent *objectEvent_Right;
+    s16 x = playerObjEvent->currentCoords.x;
+    s16 y = playerObjEvent->currentCoords.y;
+    s16 front_x, left_x, right_x, front_y, left_y, right_y;
+
+    if(task->bRockSmashStart){
+        if(task->bFrontCheck == ROCKSMASH){
+            switch(task-bDir){
+                case DIR_NORTH:
+                    front_x = x;
+                    front_y = y - 2;
+                    break;
+                case DIR_SOUTH:
+                    front_x = x;
+                    front_y = y + 2;
+                    break;
+                case DIR_EAST:
+                    front_x = x + 2;
+                    front_y = y;
+                    break;
+                case DIR_WEST:
+                    front_x = x - 2;
+                    front_y = y;
+                    break;
+            }
+            task->bFrontBomb = GetObjectEventIdByPosition(front_x, front_y, gPlayerFacingPosition.elevation);
+            objectEvent_Front = &gObjectEvents[task->bFrontBomb];
+            ObjectEventSetHeldMovement(objectEvent_Front, MOVEMENT_ACTION_ROCK_SMASH_BREAK);
+            task->bRockSmashStart = 0;
+        }
+        if(task->bLeftCheck == ROCKSMASH){
+            switch(task->bDir){
+                case DIR_NORTH:
+                    left_x = x - 1;
+                    left_y = y - 1;
+                    break;
+                case DIR_SOUTH:
+                    left_x = x + 1;
+                    left_y = y + 1;
+                    break;
+                case DIR_EAST:
+                    left_x = x + 1;
+                    left_y = y - 1;
+                    break;
+                case DIR_WEST:
+                    left_x = x - 1;
+                    left_y = y + 1;
+                    break;
+            }
+            task->bLeftBomb = GetObjectEventIdByPosition(left_x, left_y, gPlayerFacingPosition.elevation);
+            objectEvent_Left = &gObjectEvents[task->bLeftBomb];
+            ObjectEventSetHeldMovement(objectEvent_Left, MOVEMENT_ACTION_ROCK_SMASH_BREAK);
+            task->bRockSmashStart = 0;    
+        }
+        if(task->bRightCheck == ROCKSMASH){
+            switch(task->bDir){
+                case DIR_NORTH:
+                    right_x = x + 1;
+                    right_y = y + 1;
+                    break;
+                case DIR_SOUTH:
+                    right_x = x - 1;
+                    right_y = y - 1;
+                    break;
+                case DIR_EAST:
+                    right_x = x - 1;
+                    right_y = y + 1;
+                    break;
+                case DIR_WEST:
+                    right_x = x + 1;
+                    right_y = y - 1;
+                    break;
+            }
+            task->bRightBomb = GetObjectEventIdByPosition(right_x, right_y, gPlayerFacingPosition.elevation);
+            objectEvent_Right = &gObjectEvents[task->bRightBomb];
+            ObjectEventSetHeldMovement(objectEvent_Right, MOVEMENT_ACTION_ROCK_SMASH_BREAK);
+            task->bRockSmashStart = 0;    
+        }
+
+        if(task->bRockSmashStart == 0){
+            task->bBombAnimation++;
+            return FALSE;
+        }
+        task->bState = BOMB_END;
+        task->bBombAnimation++;
+        return FALSE;
+    }
+
+    if(task->bFrontBomb != 0){
+        objectEvent_Front = &gObjectEvents[task->bFrontBomb];
+        if(ObjectEventClearHeldMovementIfFinished(objectEvent_Front)){
+            FlagSet(GetObjectEventFlagIdByObjectEventId(task->bFrontBomb));
+            RemoveObjectEvent(&gObjectEvents[task->bFrontBomb]);
+            task->bFrontBomb = 0;
+        }
+    }
+    if(task->bLeftBomb != 0){
+        objectEvent_Left = &gObjectEvents[task->bLeftBomb];
+        if(ObjectEventClearHeldMovementIfFinished(objectEvent_Left)){
+            FlagSet(GetObjectEventFlagIdByObjectEventId(task->bLeftBomb));
+            RemoveObjectEvent(&gObjectEvents[task->bLeftBomb]);
+            task->bLeftBomb = 0;
+        }
+    }
+    if(task->bRightBomb != 0){
+        objectEvent_Right = &gObjectEvents[task->bRightBomb];
+        if(ObjectEventClearHeldMovementIfFinished(objectEvent_Right)){
+            FlagSet(GetObjectEventFlagIdByObjectEventId(task->bRightBomb));
+            RemoveObjectEvent(&gObjectEvents[task->bRightBomb]);
+            task->bRightBomb = 0;
+        }
+    }
+
+    if(!(task->bFrontBomb || task->bLeftBomb || task->bRightBomb)){task->bState = BOMB_END;}
+    task->bBombAnimation++;
+    return FALSE;
+}
+
+static bool8 Bomb_End(struct Task *task){
+    if(task->bBombAnimation >= BOMB_ANIM_LENGTH){
+        FieldEffectActiveListRemove(FLDEFF_BOMB);
+        FieldEffectFreeGraphicsResources(&gSprites[task->bBombSpriteID]);
+        DestroyTask(FindTaskIdByFunc(Task_Bomb));
+    }
+
+    task->bBombAnimations++;
+    return FALSE;
+}
+*/

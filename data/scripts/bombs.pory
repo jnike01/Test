@@ -1,0 +1,21 @@
+//script EventScript_ItemUseBombs{
+    //lock
+    //setfieldeffectargument(0, VAR_0x8000)
+    //setfieldeffectargument(1, VAR_0x8001)
+    //setfieldeffectargument(2, VAR_0x8002)
+    //setfieldeffectargument(3, VAR_0x8003)
+    //dofieldeffect(FLDEFF_BOMB)
+    //waitfieldeffect(FLDEFF_BOMB)
+    //setvar(VAR_0x8000, 0)
+    //setvar(VAR_0x8001, 0)
+    //setvar(VAR_0x8002, 0)
+    //setvar(VAR_0x8003, 0)
+    //release
+    //end
+//}
+
+//script EventScript_ItemNoBombs{
+//    lock
+//    release
+//    end
+//}

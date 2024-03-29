@@ -12616,4 +12616,18 @@ const struct Item gItemsInfo[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
+
+    [ITEM_POKE_VIAL] = {
+        .name = _("Poké Vial"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "Poké Vial\n
+            restores party\n
+            entirely."
+        ),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_PokeVial,
+    },
 };

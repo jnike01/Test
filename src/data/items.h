@@ -12621,9 +12621,9 @@ const struct Item gItemsInfo[] =
         .name = _("Poké Vial"),
         .price = 0,
         .description = COMPOUND_STRING(
-            "Poké Vial\n
-            restores party\n
-            entirely."
+            "Poké Vial\n"
+            "restores party\n"
+            "entirely."
         ),
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,

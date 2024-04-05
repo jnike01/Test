@@ -207,8 +207,8 @@
       "dest_warp_id": "0"
     },
     {
-      "x": 4,
-      "y": 16,
+      "x": 0,
+      "y": 13,
       "elevation": 0,
       "dest_map": "MAP_TEST_POKEMON_MART",
       "dest_warp_id": "1"
